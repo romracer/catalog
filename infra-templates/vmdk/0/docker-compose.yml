@@ -1,8 +1,8 @@
 version: '2'
 services:
-  vsphere-driver:
+  vmdk-driver:
     privileged: true
-    image: harbor.underpants-gnomes.biz/library/storage-vsphere:0.10
+    image: harbor.underpants-gnomes.biz/library/storage-vmdk:0.10
     network_mode: host
     pid: host
     ipc: host
@@ -13,7 +13,6 @@ services:
       io.rancher.container.pull_image: always
     volumes:
       - /run:/run
-      - /var/lib/docker:/var/lib/docker
       - /mnt/vmdk:/mnt/vmdk:shared
       - /dev:/host/dev
     logging:

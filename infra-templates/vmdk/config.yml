@@ -1,4 +1,4 @@
-name: vSphere Volumes
+name: vSphere VMDK Volumes
 description: |
   Docker volume plugin for vSphere.
 version: 0.10-rancher1
