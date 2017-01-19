@@ -3,7 +3,7 @@ services:
   vsphere-driver:
     privileged: true
     image: harbor.underpants-gnomes.biz/library/storage-vsphere:0.10
-    net: host
+    network_mode: host
     pid: host
     ipc: host
     labels:
