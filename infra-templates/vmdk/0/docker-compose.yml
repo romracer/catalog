@@ -2,19 +2,19 @@ version: '2'
 services:
   vmdk-driver:
     privileged: true
-    image: harbor.underpants-gnomes.biz/library/storage-vmdk:0.10
     network_mode: host
-    pid: host
-    ipc: host
+    image: harbor.underpants-gnomes.biz/library/storage-vmdk:0.10
     labels:
-      io.rancher.scheduler.global: "true"
-      io.rancher.container.create_agent: "true"
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
       io.rancher.container.agent.role: environment
       io.rancher.container.pull_image: always
+    environment:
+      ESX_HOST_PORT: '${ESX_HOST_PORT}'
     volumes:
       - /run:/run
-      - /mnt/vmdk:/mnt/vmdk:shared
       - /dev:/host/dev
+      - /mnt/vmdk:/mnt/vmdk:shared
     logging:
       driver: json-file
       options:
