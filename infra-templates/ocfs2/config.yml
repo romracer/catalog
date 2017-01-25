@@ -1,0 +1,7 @@
+name: Rancher OCFS2
+description: |
+  Docker volume plugin for OCFS2 filesystems
+version: 0.1.0
+category: Storage
+labels:
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm'

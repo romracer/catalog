@@ -1,0 +1,58 @@
+version: '2'
+services:
+  ocfs2-driver:
+    image: harbor.underpants-gnomes.biz/library/storage-ocfs2:v0.6.2
+    privileged: true
+    network_mode: host
+    pid: host
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: environment
+      io.rancher.container.pull_image: always
+    environment:
+      CLUSTER_NAME: '${CLUSTER_NAME}'
+      NUMBER_OF_HOSTS: '${NUMBER_OF_HOSTS}'
+      HOST_IP1: '${HOST_IP1}'
+      HOST_NAME1: '${HOST_NAME1}'
+      HOST_IP2: '${HOST_IP2}'
+      HOST_NAME2: '${HOST_NAME2}'
+      HOST_IP3: '${HOST_IP3}'
+      HOST_NAME3: '${HOST_NAME3}'
+      HOST_IP4: '${HOST_IP4}'
+      HOST_NAME4: '${HOST_NAME4}'
+      HOST_IP5: '${HOST_IP5}'
+      HOST_NAME5: '${HOST_NAME5}'
+      HOST_IP6: '${HOST_IP6}'
+      HOST_NAME6: '${HOST_NAME6}'
+      HOST_IP7: '${HOST_IP7}'
+      HOST_NAME7: '${HOST_NAME7}'
+      HOST_IP8: '${HOST_IP8}'
+      HOST_NAME8: '${HOST_NAME8}'
+      HOST_IP9: '${HOST_IP9}'
+      HOST_NAME9: '${HOST_NAME9}'
+      HOST_IP10: '${HOST_IP10}'
+      HOST_NAME10: '${HOST_NAME10}'
+      HOST_IP11: '${HOST_IP11}'
+      HOST_NAME11: '${HOST_NAME11}'
+      HOST_IP12: '${HOST_IP12}'
+      HOST_NAME12: '${HOST_NAME12}'
+      HOST_IP13: '${HOST_IP13}'
+      HOST_NAME13: '${HOST_NAME13}'
+      HOST_IP14: '${HOST_IP14}'
+      HOST_NAME14: '${HOST_NAME14}'
+      HOST_IP15: '${HOST_IP15}'
+      HOST_NAME15: '${HOST_NAME15}'
+      HOST_IP16: '${HOST_IP16}'
+      HOST_NAME16: '${HOST_NAME16}'
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /dlm:/dlm
+      - /var/run:/var/run
+      - /dev:/host/dev
+      - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
