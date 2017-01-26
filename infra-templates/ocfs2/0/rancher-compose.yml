@@ -17,6 +17,16 @@
       description: "Number of hosts in the cluster"
       default: 3
       required: true
+    - variable: "BACKING_DEVICE"
+      label: "Backing block device"
+      type: "string"
+      description: "Backing block device.  Should be identical on all hosts."
+      required: true
+    - variable: "MOUNT_POINT"
+      label: "Mount point"
+      type: "string"
+      description: "Mount point within the storage container.  Not used currently."
+      default: "/mnt/dockvols"
     - variable: "HOST_IP1"
       label: "IP address of host 1"
       type: "string"
