@@ -13,6 +13,8 @@ services:
     environment:
       CLUSTER_NAME: '${CLUSTER_NAME}'
       NUMBER_OF_HOSTS: '${NUMBER_OF_HOSTS}'
+      BACKING_DEVICE: '${BACKING_DEVICE}'
+      MOUNT_OPTS: '${MOUNT_OPTS}'
       HOST_IP1: '${HOST_IP1}'
       HOST_NAME1: '${HOST_NAME1}'
       HOST_IP2: '${HOST_IP2}'
