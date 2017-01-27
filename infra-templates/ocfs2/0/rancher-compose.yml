@@ -22,10 +22,14 @@
       type: "string"
       description: "Identical backing block device on all hosts, for example: /dev/disk/by-label/rancher-ocfs2."
       required: true
-    - variable: "MOUNT_OPTS"
-      label: "Custom mount options"
-      type: "string"
-      description: "Comma delimited list of mount options, for example: rw,relatime. Be careful specifying these."
+    - variable: "RANCHER_DEBUG"
+      label: "Debug Mode"
+      type: "enum"
+      description: "Enable or disable verbose logging"
+      default: false
+      options:
+        - true
+        - false
     - variable: "HOST_IP1"
       label: "IP address of host 1"
       type: "string"
