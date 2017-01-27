@@ -1,9 +1,10 @@
-.catalog:
+version: '2'
+catalog:
   name: "PowerDNS Authoritative Server"
   version: "4.0.2-rancher1"
   description: |
     A MySQL-backed PowerDNS authoritative server
-  minimum_rancher_version: "v1.1.999"
+  minimum_rancher_version: "v1.0.0"
   questions:
     - variable: "PDNSCONF_GMYSQL_HOST"
       label: "MySQL server"
@@ -100,6 +101,7 @@
       type: "string"
       description: "Comma separated list of IPs or IP/mask to permit zone transfers from"
 
-pdns-server:
-  scale: 1
-  start_on_create: true
+services:
+  pdns-server:
+    scale: 1
+    start_on_create: true
