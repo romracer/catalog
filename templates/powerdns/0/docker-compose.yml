@@ -1,0 +1,29 @@
+version: '2'
+services:
+  pdns-server:
+    image: harbor.underpants-gnomes.biz/library/pdns:4.0.2-1
+    environment:
+      PDNSCONF_ANY_TO_TCP: 'yes'
+      PDNSCONF_GMYSQL_HOST: '${PDNSCONF_GMYSQL_HOST}'
+      PDNSCONF_GMYSQL_PORT: '${PDNSCONF_GMYSQL_PORT}'
+      PDNSCONF_GMYSQL_USER: '${PDNSCONF_GMYSQL_USER}'
+      PDNSCONF_GMYSQL_PASSWORD: '${PDNSCONF_GMYSQL_PASSWORD}'
+      PDNSCONF_GMYSQL_DBNAME: '${PDNSCONF_GMYSQL_DBNAME}'
+      PDNSCONF_MASTER: '${PDNSCONF_MASTER}'
+      PDNSCONF_SLAVE: '${PDNSCONF_SLAVE}'
+      PDNSCONF_DNSUPDATE: '${PDNSCONF_DNSUPDATE}'
+      PDNSCONF_ALLOW_DNSUPDATE_FROM: '${PDNSCONF_ALLOW_DNSUPDATE_FROM}'
+      PDNSCONF_API_KEY: '${PDNSCONF_API_KEY}'
+      PDNSCONF_ALLOW_RECURSION: '${PDNSCONF_ALLOW_RECURSION}'
+      PDNSCONF_RECURSOR: '${PDNSCONF_RECURSOR}'
+      PDNSCONF_ALLOW_AXFR_IPS: '${PDNSCONF_ALLOW_AXFR_IPS}'
+    ports:
+      - '${DNS_PORT}':53/udp
+      - '${DNS_PORT}':53/tcp
+      - '${WEB_PORT}':80/tcp
+      - '${API_PORT}':8081/tcp
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'

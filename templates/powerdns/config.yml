@@ -1,0 +1,5 @@
+name: PowerDNS Authoritative Server
+description: |
+  A MySQL-backed PowerDNS authoritative server
+version: 4.0.2-rancher1
+category: External DNS

@@ -1,0 +1,105 @@
+.catalog:
+  name: "PowerDNS Authoritative Server"
+  version: "4.0.2-rancher1"
+  description: |
+    A MySQL-backed PowerDNS authoritative server
+  minimum_rancher_version: "v1.1.999"
+  questions:
+    - variable: "PDNSCONF_GMYSQL_HOST"
+      label: "MySQL server"
+      type: "string"
+      description: "MySQL server hostname"
+      required: true
+    - variable: "PDNSCONF_GMYSQL_PORT"
+      label: "MySQL port"
+      type: "int"
+      description: "MySQL server port"
+      default: 3306
+      required: true
+    - variable: "PDNSCONF_GMYSQL_USER"
+      label: "MySQL username"
+      type: "string"
+      description: "MySQL username to connect with"
+      default: "pdns"
+      required: true
+    - variable: "PDNSCONF_GMYSQL_PASSWORD"
+      label: "MySQL password"
+      type: "password"
+      description: "MySQL password to connect with"
+      required: true
+    - variable: "PDNSCONF_GMYSQL_DBNAME"
+      label: "PowerDNS database"
+      type: "string"
+      description: "PowerDNS database. Will be created and populated if it does not exist and the user has permissions"
+      default: "pdns"
+      required: true
+    - variable: "DNS_PORT"
+      label: "DNS port"
+      type: "int"
+      description: "TCP and UDP"
+      default: 53
+      required: true
+    - variable: "WEB_PORT"
+      label: "Poweradmin port"
+      type: "int"
+      description: "Poweradmin web GUI port"
+      default: 8080
+      required: true
+    - variable: "API_PORT"
+      label: "PowerDNS API port"
+      type: "int"
+      description: "PowerDNS API port.  Only enabled if API key present"
+      default: 8081
+      required: true
+    - variable: "PDNSCONF_MASTER"
+      label: "Operate in master mode"
+      type: "enum"
+      description: "Enable or disable master operation"
+      default: yes
+      options:
+        - yes
+        - no
+      required: true
+    - variable: "PDNSCONF_SLAVE"
+      label: "Operate in slave mode"
+      type: "enum"
+      description: "Enable or disable slave operation"
+      default: yes
+      options:
+        - yes
+        - no
+      required: true
+    - variable: "PDNSCONF_DNSUPDATE"
+      label: "Allow DNS updates (RFC2136)"
+      type: "enum"
+      description: "Enable or disable DNS updates"
+      default: no
+      options:
+        - yes
+        - no
+      required: true
+    - variable: "PDNSCONF_ALLOW_DNSUPDATE_FROM"
+      label: "Allow DNS updates from"
+      type: "string"
+      description: "Comma separated list of IPs or IP/mask to permit DNS updates from"
+    - variable: "PDNSCONF_API_KEY"
+      label: "PowerDNS API key"
+      type: "string"
+      description: "PowerDNS API key to set for API access. Setting this enables the API automatically"
+    - variable: "PDNSCONF_ALLOW_RECURSION"
+      label: "Allow DNS recursive queries from"
+      type: "string"
+      description: "Comma separated list of IPs or IP/mask to permit recursive DNS queries from"
+    - variable: "PDNSCONF_RECURSOR"
+      label: "Upstream recursing server"
+      type: "string"
+      description: "Upstream recursing DNS server to use for recursive queries"
+      default: "8.8.8.8"
+    - variable: "PDNSCONF_ALLOW_AXFR_IPS"
+      label: "Allow AXFR zone transfers from"
+      type: "string"
+      description: "Comma separated list of IPs or IP/mask to permit zone transfers from"
+
+pdns-server:
+  scale: 1
+  start_on_create: true
