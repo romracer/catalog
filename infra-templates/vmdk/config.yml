@@ -1,7 +1,0 @@
-name: vSphere VMDK
-description: |
-  Docker volume plugin for vSphere VMDK
-version: 0.10-rancher1
-category: Storage
-labels:
-  io.rancher.orchestration.supported: 'cattle,mesos,swarm'
