@@ -3,7 +3,9 @@ catalog:
   name: "PowerDNS Authoritative Server"
   version: "4.0.2-rancher1"
   description: |
-    A gmysql backend (MySQL/MariaDB) PowerDNS authoritative server
+    A gmysql backend (MySQL/MariaDB) PowerDNS authoritative server.
+    Compatible with Rancher External DNS using RFC 2136 DNS updates.
+    See https://doc.powerdns.com/md/authoritative/dnsupdate/ for configuration instructions.
   minimum_rancher_version: "v1.0.0"
   questions:
     - variable: "PDNSCONF_GMYSQL_HOST"
@@ -82,7 +84,7 @@ catalog:
     - variable: "PDNSCONF_ALLOW_DNSUPDATE_FROM"
       label: "Allow DNS updates from"
       type: "string"
-      description: "Comma separated list of IPs or IP/mask to permit DNS updates from"
+      description: "Comma separated list of IPs or IP/mask to permit DNS updates from. Enabling DNS updates and a blank list here permits per-zone settings"
     - variable: "PDNSCONF_API_KEY"
       label: "PowerDNS API key"
       type: "string"
@@ -99,7 +101,7 @@ catalog:
     - variable: "PDNSCONF_ALLOW_AXFR_IPS"
       label: "Allow AXFR zone transfers from"
       type: "string"
-      description: "Comma separated list of IPs or IP/mask to permit zone transfers from"
+      description: "Comma separated list of IPs or IP/mask to permit zone transfers from. This can also be enabled per-zone in the domain metadata"
 
 services:
   pdns-server:

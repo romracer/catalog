@@ -18,10 +18,10 @@ services:
       PDNSCONF_RECURSOR: '${PDNSCONF_RECURSOR}'
       PDNSCONF_ALLOW_AXFR_IPS: '${PDNSCONF_ALLOW_AXFR_IPS}'
     ports:
-      - '${DNS_PORT}':53/udp
-      - '${DNS_PORT}':53/tcp
-      - '${WEB_PORT}':80/tcp
-      - '${API_PORT}':8081/tcp
+      - ${DNS_PORT}:53/udp
+      - ${DNS_PORT}:53/tcp
+      - ${WEB_PORT}:80/tcp
+      - ${API_PORT}:8081/tcp
     logging:
       driver: json-file
       options:
