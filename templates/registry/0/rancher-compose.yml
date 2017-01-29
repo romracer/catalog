@@ -52,6 +52,10 @@
       type: "string"
       required: true
       default: "registry_authentication"
+    - variable: "REGISTRY_HTTP_SECRET"
+      label: "Registry HTTP secret"
+      description: "Generate a random secret if planning to run several registries behind a load-balancer"
+      type: "password"
 registry-datavolume:
   scale: 1
 create-certs:
