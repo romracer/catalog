@@ -1,0 +1,62 @@
+.catalog:
+  name: "Docker Registry"
+  version: "1.0.0"
+  description: |
+    "A simple docker registry."
+  uuid: docker-registry-0
+  questions:
+    - variable: "DOCKER_USERNAME"
+      label: "Docker login"
+      description: "Docker login"
+      type: "string"
+      required: true
+    - variable: "DOCKER_PASSWORD"
+      label: "Docker password"
+      description: "Docker password"
+      type: "password"
+      required: true
+    - variable: "FQDN"
+      label: "FQDN"
+      description: "FQDN for the registry"
+      type: "string"
+      required: true
+    - variable: "MAX_DAYS"
+      label: "Certificate validity"
+      description: "Number of days the certificate is valid"
+      type: "int"
+      default: 365
+    - variable: "VOLUME_DRIVER"
+      label: "Persistent volume driver"
+      description: "Choose a persistent volume driver if desired"
+      type: "enum"
+      required: true
+      default: "local"
+      options:
+        - "local"
+        - "rancher-ocfs2"
+    - variable: "REGISTRY_DATA"
+      label: "Registry data volume"
+      description: "Volume name for registry data"
+      type: "string"
+      required: true
+      default: "registry_data"
+    - variable: "CERTIFICATE_DATA"
+      label: "Certificate data volume"
+      description: "Volume name for registry certificates"
+      type: "string"
+      required: true
+      default: "registry_certificates"
+    - variable: "AUTHENTICATION_DATA"
+      label: "Registry auth data volume"
+      description: "Volume name for registry authentication information"
+      type: "string"
+      required: true
+      default: "registry_authentication"
+registry-datavolume:
+  scale: 1
+create-certs:
+  scale: 1
+registry:
+  scale: 1
+registry-auth:
+  scale: 1

@@ -1,0 +1,56 @@
+registry:
+  ports:
+    - 5000:5000/tcp
+  environment:
+    REGISTRY_AUTH: htpasswd
+    REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+    REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+  labels:
+    io.rancher.sidekicks: create-certs,registry-auth,registry-datavolume
+    io.rancher.container.pull_image: always
+  tty: true
+  image: registry:2
+  volumes_from:
+    - create-certs
+    - registry-auth
+    - registry-datavolume
+  stdin_open: true
+registry-datavolume:
+  labels:
+    io.rancher.container.start_once: 'true'
+  tty: true
+  image: busybox
+  volumes:
+    - ${REGISTRY_DATA}:/var/lib/docker/registry
+  volume_driver: ${VOLUME_DRIVER}
+  stdin_open: true
+create-certs:
+  environment:
+    LIFETIME: ${MAX_DAYS}
+    COMMON_NAME: ${FQDN}
+    KEY_NAME: domain
+  labels:
+    io.rancher.container.start_once: 'true'
+  tty: true
+  image: romracer/openssl-certgen:latest
+  volumes:
+    - ${CERTIFICATE_DATA}:/certs
+  volume_driver: ${VOLUME_DRIVER}
+  stdin_open: true
+registry-auth:
+  labels:
+    io.rancher.container.start_once: 'true'
+  command:
+    - htpasswd
+    - -cBb
+    - /auth/htpasswd
+    - ${DOCKER_USERNAME}
+    - ${DOCKER_PASSWORD}
+  tty: true
+  image: registry:2
+  volumes:
+    - ${AUTHENTICATION_DATA}:/auth
+  volume_driver: ${VOLUME_DRIVER}
+  stdin_open: true
