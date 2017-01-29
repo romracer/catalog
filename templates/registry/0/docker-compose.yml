@@ -26,7 +26,7 @@ registry-datavolume:
   tty: true
   image: busybox
   volumes:
-    - ${REGISTRY_DATA}:/var/lib/docker/registry
+    - ${REGISTRY_DATA}:/var/lib/registry
   volume_driver: ${VOLUME_DRIVER}
   stdin_open: true
 create-certs:
