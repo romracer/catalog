@@ -1,7 +1,7 @@
 version: '2'
 services:
   ocfs2-driver:
-    image: registry.underpants-gnomes.biz:5000/storage-ocfs2:v0.6.6
+    image: romracer/storage-ocfs2:v0.6.6
     privileged: true
     network_mode: host
     pid: host
