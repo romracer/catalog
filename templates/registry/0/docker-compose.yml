@@ -3,6 +3,7 @@ registry:
     - 5000:5000/tcp
   environment:
     REGISTRY_HTTP_SECRET: ${REGISTRY_HTTP_SECRET}
+    REGISTRY_STORAGE_DELETE_ENABLED: true
     REGISTRY_AUTH: htpasswd
     REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
     REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
