@@ -2,12 +2,13 @@ registry:
   ports:
     - 5000:5000/tcp
   environment:
-    REGISTRY_HTTP_SECRET: '${REGISTRY_HTTP_SECRET}'
+    REGISTRY_HTTP_SECRET: ${REGISTRY_HTTP_SECRET}
     REGISTRY_AUTH: htpasswd
     REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
     REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
-    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
-    REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/cert.pem
+    REGISTRY_HTTP_TLS_KEY: /certs/key.pem
+    REGISTRY_HTTP_TLS_CLIENTCAS_0: /certs/ca.pem
   labels:
     io.rancher.sidekicks: create-certs,registry-auth,registry-datavolume
     io.rancher.container.pull_image: always
@@ -29,13 +30,16 @@ registry-datavolume:
   stdin_open: true
 create-certs:
   environment:
-    LIFETIME: ${MAX_DAYS}
-    COMMON_NAME: ${FQDN}
-    KEY_NAME: domain
+    CA_SUBJECT: 'docker-ca'
+    CA_EXPIRE: ${MAX_DAYS}
+    SSL_SUBJECT: ${FQDN}
+    SSL_EXPIRE: ${MAX_DAYS}
+    SSL_DNS: ${SAN_DNS}
+    SSL_IP: ${SAN_IP}
   labels:
     io.rancher.container.start_once: 'true'
   tty: true
-  image: romracer/openssl-certgen:latest
+  image: paulczar/omgwtfssl:latest
   volumes:
     - ${CERTIFICATE_DATA}:/certs
   volume_driver: ${VOLUME_DRIVER}
