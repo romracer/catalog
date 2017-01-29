@@ -1,5 +1,5 @@
 name: Docker Registry
 description: |
-  A simple docker registry.
+  A simple Docker registry
 version: 1.0.0
 category: "Docker"

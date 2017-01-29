@@ -2,17 +2,17 @@
   name: "Docker Registry"
   version: "1.0.0"
   description: |
-    "A simple docker registry."
+    A simple Docker registry
   uuid: docker-registry-0
   questions:
     - variable: "DOCKER_USERNAME"
-      label: "Docker login"
-      description: "Docker login"
+      label: "Registry login"
+      description: "Registry login username"
       type: "string"
       required: true
     - variable: "DOCKER_PASSWORD"
-      label: "Docker password"
-      description: "Docker password"
+      label: "Registry password"
+      description: "Registry login password"
       type: "password"
       required: true
     - variable: "FQDN"
@@ -22,7 +22,7 @@
       required: true
     - variable: "MAX_DAYS"
       label: "Certificate validity"
-      description: "Number of days the certificate is valid"
+      description: "Number of days the registry certificate is valid"
       type: "int"
       default: 365
     - variable: "VOLUME_DRIVER"
