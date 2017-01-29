@@ -5,7 +5,7 @@ Mount an OCFS2 filesystem for shared usage
 ### Requirements
 
 * Network IP address and hostname for each node (private network recommended)
-* Pre-partitioned and OCFS2-formatted block device attached to each node at the same location (ex. /dev/disk/by-path/pci-0000:03:00.0-scsi-0:0:1:0-part1 or /dev/disk/by-label/rancher-ocfs2)
+* Pre-partitioned and OCFS2-formatted block device attached to each node at the same location (ex. `/dev/disk/by-path/pci-0000:03:00.0-scsi-0:0:1:0-part1` or `/dev/disk/by-label/rancher-ocfs2`)
 
 An OCFS2 filesystem can be created in Ubuntu 16.04 or this container.
 A recommended command to create one using this container might be:
