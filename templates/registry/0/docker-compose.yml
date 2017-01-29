@@ -58,5 +58,6 @@ registry-auth:
   image: registry:2
   volumes:
     - ${AUTHENTICATION_DATA}:/auth
+    - ${REGISTRY_DATA}:/var/lib/registry
   volume_driver: ${VOLUME_DRIVER}
   stdin_open: true
