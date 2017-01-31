@@ -29,7 +29,7 @@ galera-leader-forwarder:
   image: registry.underpants-gnomes.biz:5000/galera-leader-proxy:v0.1.0
   net: "container:galera"
   volumes_from:
-   - 'mariadb-galera-data'
+    - 'mariadb-galera-data'
 galera:
   image: registry.underpants-gnomes.biz:5000/galera-conf:v0.1.0
   labels:
@@ -44,9 +44,9 @@ galera:
 
 galera-lb:
   expose:
-  - 3306:3307/tcp
+    - 3306:3307/tcp
   tty: true
   image: rancher/load-balancer-service
   links:
-  - galera:galera
+    - galera:galera
   stdin_open: true

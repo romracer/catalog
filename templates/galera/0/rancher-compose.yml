@@ -43,7 +43,7 @@ galera:
       wsrep_sst_auth=root:${mysql_root_password}
       group_concat_max_len=8192
       wait_timeout=14400
-      progress=1
+      progress_report_time=1
 galera-lb:
   scale: 1
   load_balancer_config: {}
