@@ -11,7 +11,7 @@ mariadb-galera-server:
     - 'mariadb-galera-data'
   labels:
     io.rancher.container.hostname_override: container_name
-  entrypoint: bash -x /opt/rancher/start_galera
+  entrypoint: bash -x /opt/rancher/start_galera.sh
 mariadb-galera-data:
   image: registry.underpants-gnomes.biz:5000/galera:10.1.21-rancher1
   net: none
