@@ -1,0 +1,7 @@
+name: MariaDB Galera Cluster
+description: |
+    Synchronous multi-master cluster for MariaDB
+version: 10.1.21-rancher1
+category: Databases
+labels:
+  io.rancher.certified: Experimental
