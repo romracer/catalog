@@ -27,8 +27,8 @@ galera:
     mysqld: |
       character_set_server=utf8
       collation_server=utf8_general_ci
-      query_cache_size=0
-      query_cache_type=0
+      query_cache_size=64M
+      query_cache_limit=1M
       innodb_buffer_pool_size=512M
       innodb_file_per_table=1
       innodb_autoinc_lock_mode=2
