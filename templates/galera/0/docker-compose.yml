@@ -35,7 +35,7 @@ galera:
   labels:
     io.rancher.sidekicks: mariadb-data,mariadb-server,leader-forwarder
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
   volumes_from:
     - 'mariadb-data'
   stdin_open: true
@@ -43,7 +43,7 @@ galera:
   command: /bin/bash
 
 galera-lb:
-  expose:
+  ports:
     - 3306:3307/tcp
   tty: true
   image: rancher/load-balancer-service
