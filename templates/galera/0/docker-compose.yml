@@ -18,10 +18,10 @@ mariadb-data:
   environment:
     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
   volumes:
-    - /var/lib/mysql
-    - /etc/mysql/conf.d
-    - /docker-entrypoint-initdb.d
-    - /opt/rancher
+    - galera-mariadb-data:/var/lib/mysql
+    - galera-mariadb-conf:/etc/mysql/conf.d
+    - galera-mariadb-preload:/docker-entrypoint-initdb.d
+    - galera-mariadb-rancher:/opt/rancher
   command: /bin/true
   labels:
     io.rancher.container.start_once: true
