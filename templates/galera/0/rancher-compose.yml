@@ -38,7 +38,7 @@ galera:
       default_storage_engine=InnoDB
       wsrep_on=ON
       wsrep_provider=/usr/lib/galera/libgalera_smm.so
-      wsrep_provider_options="gcache.size = 2G"
+      wsrep_provider_options="gcache.size = 256M"
       wsrep_sst_method=mysqldump
       wsrep_sst_auth=root:${mysql_root_password}
       group_concat_max_len=8192
