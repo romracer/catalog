@@ -29,7 +29,7 @@ galera:
       collation_server=utf8_general_ci
       query_cache_size=0
       query_cache_type=0
-      innodb_buffer_pool_size=512M
+      innodb_buffer_pool_size=384M
       innodb_file_per_table=1
       innodb_autoinc_lock_mode=2
       innodb_doublewrite=1
@@ -38,7 +38,6 @@ galera:
       default_storage_engine=InnoDB
       wsrep_on=ON
       wsrep_provider=/usr/lib/galera/libgalera_smm.so
-      wsrep_provider_options="gcache.size = 256M"
       wsrep_sst_method=mysqldump
       wsrep_sst_auth=root:${mysql_root_password}
       group_concat_max_len=8192
