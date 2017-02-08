@@ -45,9 +45,9 @@ export BACKING_DEVICE=/dev/disk/by-label/rancher-ocfs2
 ```
 
 ### Additional Info
-See [the plugin code][1] for details on the implementation.  
-Reference [the Oracle troubleshooting guide][2] for issues with OCFS2.  These commands will need to be done in the ocfs2 driver container.  
-PDF man pages for the 1.8 release of OCFS2 tools (used in this container) can be found [here][3].  
+* See [the plugin code][1] for details on the implementation.  
+* Reference [the Oracle troubleshooting guide][2] for issues with OCFS2.  These commands will need to be done in the ocfs2 driver container.  
+* PDF man pages for the 1.8 release of OCFS2 tools (used in this container) can be found [here][3].  
 
 [1]: https://github.com/romracer/storage/tree/add_ocfs2_driver/package/ocfs2
 [2]: https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-tshoot-ocfs2.html
