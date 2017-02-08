@@ -8,8 +8,8 @@
     - variable: "CLUSTER_NAME"
       label: "OCFS2 cluster name"
       type: "string"
-      description: "Name of the OCFS2 cluster"
-      default: "rancher-ocfs2"
+      description: "Alpha-numeric only name of the OCFS2 cluster. This must match the name used to format the file system."
+      default: "rancherocfs2"
       required: true
     - variable: "NUMBER_OF_HOSTS"
       label: "Number of hosts"
