@@ -181,6 +181,21 @@
       type: "string"
       required: true
       default: "SFbIJdV9kO3n5ib6lczuEw=="
+    - variable: volume_driver
+      label: "Persistent volume driver"
+      description: "Choose a persistent volume driver if desired"
+      type: "enum"
+      required: true
+      default: "local"
+      options:
+        - "local"
+        - "rancher-ocfs2"
+    - variable: consul_data
+      label: "Consul data volume"
+      description: "Volume name for Consul data"
+      type: "string"
+      required: true
+      default: "consul_data"
 consul:
   scale: 3
   start_on_create: true

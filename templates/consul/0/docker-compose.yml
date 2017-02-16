@@ -14,6 +14,5 @@ consul:
   volumes:
     - /opt/rancher/ssl
     - /opt/rancher/config
-    - /var/consul
-  ports:
-    - 8500:8500/tcp
+    - ${consul_data}:/var/consul
+  volume_driver: ${volume_driver}
