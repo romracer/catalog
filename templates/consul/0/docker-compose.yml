@@ -1,18 +1,23 @@
-consul-conf:
-  image: romracer/consul-config
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.pull_image: always
-  volumes_from:
-    - consul
-  net: "container:consul"
-consul:
-  image: romracer/consul
-  labels:
-    io.rancher.sidekicks: consul-conf
-    io.rancher.container.pull_image: always
-  volumes:
-    - /opt/rancher/ssl
+version: '2'
+volumes:
+  ${consul_data}:
+    external: true
+    driver: ${volume_driver}
+services:
+  consul:
+    image: romracer/consul
+    volumes:
     - /opt/rancher/config
+    - /opt/rancher/ssl
     - ${consul_data}:/var/consul
-  volume_driver: ${volume_driver}
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: consul-conf
+  consul-conf:
+    image: romracer/consul-config
+    network_mode: container:consul
+    volumes_from:
+    - consul
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
