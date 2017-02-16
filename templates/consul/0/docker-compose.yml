@@ -3,16 +3,22 @@ volumes:
   ${consul_data}:
     external: true
     driver: ${volume_driver}
+  consul_config:
+    driver: local
+  consul_ssl:
+    driver: local
 services:
   consul:
     image: romracer/consul
     volumes:
-    - /opt/rancher/config
-    - /opt/rancher/ssl
+    - consul_config:/opt/rancher/config
+    - consul_ssl:/opt/rancher/ssl
     - ${consul_data}:/var/consul
     labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: consul-conf
+    expose:
+    - 8500
   consul-conf:
     image: romracer/consul-config
     network_mode: container:consul
