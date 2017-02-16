@@ -2,16 +2,16 @@ version: '2'
 volumes:
   ${consul_data}:
     driver: ${volume_driver}
-  consul_config:
-    driver: local
-  consul_ssl:
-    driver: local
+  ${consul_config}:
+    driver: ${volume_driver}
+  ${consul_ssl}:
+    driver: ${volume_driver}
 services:
   consul:
     image: romracer/consul
     volumes:
-    - consul_config:/opt/rancher/config
-    - consul_ssl:/opt/rancher/ssl
+    - ${consul_config}:/opt/rancher/config
+    - ${consul_ssl}:/opt/rancher/ssl
     - ${consul_data}:/var/consul
     labels:
       io.rancher.container.pull_image: always
