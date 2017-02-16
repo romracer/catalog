@@ -1,0 +1,210 @@
+.catalog:
+  name: "Consul"
+  description: "Secure Consul cluster"
+  version: "0.6-rancher1"
+  uuid: consul-0
+  questions:
+    - variable: ca_crt
+      label: "CA certificate"
+      type: "multiline"
+      required: true
+      default: |
+        -----BEGIN CERTIFICATE-----
+        MIID4TCCAsmgAwIBAgIJALOvLOdqA71YMA0GCSqGSIb3DQEBCwUAMIGGMQswCQYD
+        VQQGEwJDWjEOMAwGA1UECAwFQ3plY2gxDTALBgNVBAcMBEJybm8xETAPBgNVBAoM
+        CE5ldHN1aXRlMQ8wDQYDVQQLDAZEZXZPcHMxNDAyBgNVBAMMK2Rldm9wcy1yYW5j
+        aGVyLWRvY2tlci0wMS12YWRhbWVjLmRjMS5jb25zdWwwHhcNMTcwMTA2MDc0NDM2
+        WhcNMjcwMTA0MDc0NDM2WjCBhjELMAkGA1UEBhMCQ1oxDjAMBgNVBAgMBUN6ZWNo
+        MQ0wCwYDVQQHDARCcm5vMREwDwYDVQQKDAhOZXRzdWl0ZTEPMA0GA1UECwwGRGV2
+        T3BzMTQwMgYDVQQDDCtkZXZvcHMtcmFuY2hlci1kb2NrZXItMDEtdmFkYW1lYy5k
+        YzEuY29uc3VsMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsMEl4Ne
+        QlWoiWLeFaJFEaO7TC4XzZ26Pq0UWIm88j2v6d38ZBF5v6Uq06WYVVjgfBKXKdor
+        MDgtDKNMeLXmjCeG8ixTSW+2bDeSpE+tzhJWUcItEM0HXlNIFOaAY1gAZiNWwxUn
+        s8LWd440Rk5adArxo3TTN7nVzzvD96ZLR05Po8R5oX8CYvreI2sChmhpxF9bq9qh
+        dAKij/QWyYHAz8dWLEUJ6L4GYwKDgTpsV8K9dd75E6ugCH/O+CKzf/4DHqzqs4VW
+        osb8vRpzKpvsdONmmKnPP7spAlyCQ6T9TrdX4gyP8m+9vvwUS6cLvPWFf9h0smsa
+        T6qDIKsWTw6oZwIDAQABo1AwTjAdBgNVHQ4EFgQU8ueHucitsojN/1viz7bI1O61
+        /CYwHwYDVR0jBBgwFoAU8ueHucitsojN/1viz7bI1O61/CYwDAYDVR0TBAUwAwEB
+        /zANBgkqhkiG9w0BAQsFAAOCAQEAWhWi/Q82RFKKlIr2dVHWAXh3yBAHPoFBBhzA
+        mabH+wuwVJO9F1+ejHnj50SYc+6anFhcrnaclN74CoZC20viBSP5ABvDQmRmV0xX
+        fiwEoIX/xCNuhAWWdD+7VdoR5dCDhk8M35G+sG0LLhzzExq7y1U1mFnSGlgM5exs
+        YVBPJVeQOA1oIhtO+RE31vXTbni9612WlWG0WOn7T61nYFIzzzCbMT4PoAhOKBq7
+        e5oYeFFBHxxiID5K9v2lWmqMN2Cvor/j61+gd3FwoeBPwqa7O+JrMAw7C+nOWDpz
+        ZqQTBkJPRZumYEJW9UnX2xeuoSb2ULfU4zm+FGppEo6sWCUAjw==
+        -----END CERTIFICATE-----
+    - variable: consul1_key
+      label: "First consul key"
+      type: "multiline"
+      required: true
+      default: |
+        -----BEGIN PRIVATE KEY-----
+        MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBALGKZB8JA6ffLlkh
+        UhTfWJ/PGBGh3Z8QRdi2ha86sbK1xUHGNS1Bd16Q6Kc0hy0wS4OF/kqest1HNMDY
+        k1YO/fagVFe4yqNpU1i0Bj/9x35EhaVf+F1xtcJl7EMM7a8e1+Mv1VGG8MZfhi/J
+        KalhlAHyHT7rBAXJWYYaVwm7tD7vAgMBAAECgYEAhMV9GKSSIlHKhIdhrhBVY7Xp
+        Rw5pAdKWmXnuQdxAFejP6t+C1yRVU9hE1P54dPfgESz8vesu0kK1Fd8hWEN/8lcb
+        mvjA5PGlLFbhlD8I02GR6/ClqBjhv6d0NNbHyE1RDWl1/kTGES77HF+dLjsbV3eP
+        gr3CugotJevJe/JSgnkCQQDqyxlBOp/D7pZdB2XTgDMtjk050AOTnVo9e6kTZJOx
+        wkjppv5X/UmnJ7tLHk4HOj5tEPgpmxCIRs/N5MZEFAk1AkEAwZN94v3Ao3cv5LWy
+        8KeL41u1LGF1ev0qGplKIZWwjnhQdfTerwpwTIQxEOUg0aXxXYNFvaLlZuTnMcYi
+        v9tQEwJAU10bMWrEMQf0QUGQKOEayrD8wGsX6gBzeuL+LBGI0xN9WeBd7BXVYdEc
+        kdZHtA88/PKKehNBcnFZ9OumbaODhQJBAKBV1UCNo+EB2MachWF1tZWVIWRoORGs
+        3hH4BAH7ZaksGKELOONNRyTpnWZ8Eonz5A7rq3lekpp+YMzGa4P0WMcCQQDXgNEY
+        ZI++M7RytaCtgQ3+6vGm0ObkaMCq2LGy17qwYHG99/vcwxQiGQL9I/Iu+3h58Sx8
+        9yl65DhSYb4TOzD4
+        -----END PRIVATE KEY-----
+    - variable: consul1_crt
+      label: "First consul certificate"
+      type: "multiline"
+      required: true
+      default: |
+        -----BEGIN CERTIFICATE-----
+        MIIDnjCCAoagAwIBAgIBCzANBgkqhkiG9w0BAQUFADCBhjELMAkGA1UEBhMCQ1ox
+        DjAMBgNVBAgMBUN6ZWNoMQ0wCwYDVQQHDARCcm5vMREwDwYDVQQKDAhOZXRzdWl0
+        ZTEPMA0GA1UECwwGRGV2T3BzMTQwMgYDVQQDDCtkZXZvcHMtcmFuY2hlci1kb2Nr
+        ZXItMDEtdmFkYW1lYy5kYzEuY29uc3VsMB4XDTE3MDEwNjA3NTUzOVoXDTE4MDEw
+        NjA3NTUzOVowdzE0MDIGA1UEAwwrZGV2b3BzLXJhbmNoZXItZG9ja2VyLTAxLXZh
+        ZGFtZWMuZGMxLmNvbnN1bDEOMAwGA1UECAwFQ3plY2gxCzAJBgNVBAYTAkNaMREw
+        DwYDVQQKDAhOZXRzdWl0ZTEPMA0GA1UECwwGRGV2T3BzMIGfMA0GCSqGSIb3DQEB
+        AQUAA4GNADCBiQKBgQCximQfCQOn3y5ZIVIU31ifzxgRod2fEEXYtoWvOrGytcVB
+        xjUtQXdekOinNIctMEuDhf5KnrLdRzTA2JNWDv32oFRXuMqjaVNYtAY//cd+RIWl
+        X/hdcbXCZexDDO2vHtfjL9VRhvDGX4YvySmpYZQB8h0+6wQFyVmGGlcJu7Q+7wID
+        AQABo4GoMIGlMAkGA1UdEwQCMAAwHQYDVR0OBBYEFE+IyK/+sqW6p2gi7p+53fE9
+        iLpFMB8GA1UdIwQYMBaAFPLnh7nIrbKIzf9b4s+2yNTutfwmMAsGA1UdDwQEAwIF
+        oDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwLAYDVR0fBCUwIzAhoB+g
+        HYYbaHR0cDovL3BhdGgudG8uY3JsL2RlbW8uY3JsMA0GCSqGSIb3DQEBBQUAA4IB
+        AQAWtubzpxS5ncIT+j5ivhgitA+PsFavrwNHy5kQLX2fPBaV7N7IE9LNaYw/S7zn
+        nZZJP/dbrr29uMBz3dNoyFt+/1OYCuLnZkcIYiNLq6AUCy81EvENgDWNDGLFaMDh
+        yo0nU+9Js/WKmQ80YhUMdjP9khctYl1eszgG2139gOjq4290q9FOaAc68LKVxNy3
+        B7JyAXgdt29YDbrBfUQZk42IpDZRwZsKT2Rcbxb5HKc+1yhuI3/80LWTgF+ijrIe
+        Gru5PxtmMImxfOpqUIL2ZTjpM0T+VdB4FzUsC3JJoTLkI78THZqYfb9H2vJWB1NF
+        ljvYQFWjQ2PBnVBxjFfdsCRw
+        -----END CERTIFICATE-----
+    - variable: consul2_key
+      label: "Second consul key"
+      type: "multiline"
+      required: true
+      default: |
+        -----BEGIN PRIVATE KEY-----
+        MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBANiQKEbLQxSArMs4
+        GPJGMK4kK4iKumiUPuAtbO+uwKINHjj3USXULxfzw+cqQ7mwsWtTXIOkuTSthToa
+        5RbJ2TF2GyekNlkyjDlfsvQtSGdx6MS0G+POR+9ivuzLmJH7sxhjaQ6EqFzmmjH5
+        YNTxmkzWwuR7wT822dtI4VlR5FT5AgMBAAECgYEAgDjiUAA7SGFjbbNaOeBLJGAw
+        ElkpQ5A6phrfPA546bngohP0zPQTqhffbvg8Py6Z7ZTe2ubl7YWrsxqHd3WtjR+t
+        C1Up2GANTp0glIE0WR7RH+KIXzvEID8A+Sv5sB3kfo2SDGGUKkHF4EP02+ieLSW3
+        aj8QzkYJUFGH95DqAZ0CQQDuAh8ahctz6ZQrUDWg6hMVg6P9cBW27jWYFx/RMg/Q
+        YnCYWg/asvnpErj5WLzFmDGTi2O1T0KGun8W4VxkcI5XAkEA6O8IuKESk/VrOuwo
+        ce79O/QwOfOenX5eJwmt0Z21Y0bqKbOI8s3By7ltmdLNIS5o5ty/wfVrNYnVbJA9
+        eJGFLwJAWfeZVEhA+MbRiHHgY7w3jIlfQtzMiIKQ5bXQBB69VZLwZtacaZn/17eJ
+        DlAZw0Ndch1dilq0lgMHKVn0t87ILwJBAOej1iNtIsF63MEC2pG63aACjPcEeycZ
+        5N2jdXSwBhMNEY6Y2MbEsUU8SG8hQBcQRQfYXOWwfoYGZPSKWGcPJ8cCQQDVIcXJ
+        yminDp0cSnXMRQZP9GlIgBauFVYiQ0M3YFUUfthmYguh8c+nrfv/XGfCoH0JuGxI
+        7pkvBewb7EvVlaXW
+        -----END PRIVATE KEY-----
+    - variable: consul2_crt
+      label: "Second consul certificate"
+      type: "multiline"
+      required: true
+      default: |
+        -----BEGIN CERTIFICATE-----
+        MIIDnjCCAoagAwIBAgIBDDANBgkqhkiG9w0BAQUFADCBhjELMAkGA1UEBhMCQ1ox
+        DjAMBgNVBAgMBUN6ZWNoMQ0wCwYDVQQHDARCcm5vMREwDwYDVQQKDAhOZXRzdWl0
+        ZTEPMA0GA1UECwwGRGV2T3BzMTQwMgYDVQQDDCtkZXZvcHMtcmFuY2hlci1kb2Nr
+        ZXItMDEtdmFkYW1lYy5kYzEuY29uc3VsMB4XDTE3MDEwNjA3NTU0NloXDTE4MDEw
+        NjA3NTU0NlowdzE0MDIGA1UEAwwrZGV2b3BzLXJhbmNoZXItZG9ja2VyLTAyLXZh
+        ZGFtZWMuZGMxLmNvbnN1bDEOMAwGA1UECAwFQ3plY2gxCzAJBgNVBAYTAkNaMREw
+        DwYDVQQKDAhOZXRzdWl0ZTEPMA0GA1UECwwGRGV2T3BzMIGfMA0GCSqGSIb3DQEB
+        AQUAA4GNADCBiQKBgQDYkChGy0MUgKzLOBjyRjCuJCuIirpolD7gLWzvrsCiDR44
+        91El1C8X88PnKkO5sLFrU1yDpLk0rYU6GuUWydkxdhsnpDZZMow5X7L0LUhncejE
+        tBvjzkfvYr7sy5iR+7MYY2kOhKhc5pox+WDU8ZpM1sLke8E/NtnbSOFZUeRU+QID
+        AQABo4GoMIGlMAkGA1UdEwQCMAAwHQYDVR0OBBYEFIfyz9TcAaWBE+nBiaghn3BC
+        k5xkMB8GA1UdIwQYMBaAFPLnh7nIrbKIzf9b4s+2yNTutfwmMAsGA1UdDwQEAwIF
+        oDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwLAYDVR0fBCUwIzAhoB+g
+        HYYbaHR0cDovL3BhdGgudG8uY3JsL2RlbW8uY3JsMA0GCSqGSIb3DQEBBQUAA4IB
+        AQBtjZDI8hOy861pYZR2L0k0sFprhU9U/GHceGahnK8Pq5wMJA+hrl6DFXDiKBHg
+        mFmA3Kj95Jmjdy19cp4QwyypYUwJ7YuCXK68JlyRz67suNJ5dnWyxiBIA79NAcoU
+        DZrP50CkN33yEizUrfhb2ZugSCr4GtQJfkNWcMilMs4aHOx3L27XtmXljC/YvRKJ
+        3xvQy4sz5yDj/nq/D8er90GKSjiFP1hFNEnDGUYx/DZVSpOMl+utmB5/BWp0MxN0
+        hw99Jciw+W3OABwDMP5U8lPvxUbzGNSrXxXFkNA/W4YPPhviraleFhtzqgk3/h0i
+        /YVPGB73KgvxdMLxJ6CF0Qi4
+        -----END CERTIFICATE-----
+    - variable: consul3_key
+      label: "Third consul key"
+      type: "multiline"
+      required: true
+      default: |
+        -----BEGIN PRIVATE KEY-----
+        MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKbYbag1JosJaao+
+        doNA8idOV87Yz/wS6HmrUFAcJYrZfzKyhhx9ARoFaQXBNYVWJ3WXlqBd1fIDbf8B
+        rN2sxieg594vxTOwiplX4DdIJs2yL2kTF2+a90xP+z4GIFtKoFnguybvj8qnC4Lb
+        FWlS0mgXwyQXN+d4znFHZd1EO1vVAgMBAAECgYAdlHNkhf/OWJ3eK/LQ9Fu6Mj6J
+        EpFVLHkA0SmM+mCBjGvrrhDuzg668UicV5PIjuyyAW0YA2rh3E/NDRv7tRzwMlvp
+        WZyzpu8Dz/mFOM1qKFE/Phm4AyQGrGjArfAU77nD5dcuQbcXaEt69xkLsblaNWeo
+        ZaYlUgFJm+0WcCnAhQJBANSxd1OsOK+EbU7Cmd0l1k5+pzMmM/JoZ9Fz7BDzd88R
+        C+9ROa0GNhxz4NlEwgiHaRetuhYS00t/RaQ+/vWq+GsCQQDI0SrJXlWLjVlsbrxS
+        r/8VtQqY/08/rksixjjY2KjhI06+sT69YpRQAmX/sxyqF0OuoYwrs009IzOK2zMP
+        1Qy/AkAyNMoEGE0xMUNUKh+D0mCqGr+BFW2BtR98k66Pucj4Of/lN/kzXJn9UWUs
+        JEzhEoW+LyYT+9GgqqRXxv8MIpWNAkEAoyF3dnlRWLoMaI9UIH+j4ghdgYf04rA9
+        jRQlXdIy7iD2eOYXJ1WLUauBHERuBqY7bwMAkQdouT99QVFrm3LglQJAUk7ow00h
+        WVTXbCJWNO1C4BmlgXWxrFw8tMaCUWI2gy/K/X7/pJQLj3NZJoTjNx9GU6Nr/zzl
+        639tAnGhCyVsWw==
+        -----END PRIVATE KEY-----
+    - variable: consul3_crt
+      label: "Third consul certificate"
+      type: "multiline"
+      required: true
+      default: |
+        -----BEGIN CERTIFICATE-----
+        MIIDnjCCAoagAwIBAgIBDTANBgkqhkiG9w0BAQUFADCBhjELMAkGA1UEBhMCQ1ox
+        DjAMBgNVBAgMBUN6ZWNoMQ0wCwYDVQQHDARCcm5vMREwDwYDVQQKDAhOZXRzdWl0
+        ZTEPMA0GA1UECwwGRGV2T3BzMTQwMgYDVQQDDCtkZXZvcHMtcmFuY2hlci1kb2Nr
+        ZXItMDEtdmFkYW1lYy5kYzEuY29uc3VsMB4XDTE3MDEwNjA3NTU1MloXDTE4MDEw
+        NjA3NTU1MlowdzE0MDIGA1UEAwwrZGV2b3BzLXJhbmNoZXItZG9ja2VyLTAzLXZh
+        ZGFtZWMuZGMxLmNvbnN1bDEOMAwGA1UECAwFQ3plY2gxCzAJBgNVBAYTAkNaMREw
+        DwYDVQQKDAhOZXRzdWl0ZTEPMA0GA1UECwwGRGV2T3BzMIGfMA0GCSqGSIb3DQEB
+        AQUAA4GNADCBiQKBgQCm2G2oNSaLCWmqPnaDQPInTlfO2M/8Euh5q1BQHCWK2X8y
+        soYcfQEaBWkFwTWFVid1l5agXdXyA23/AazdrMYnoOfeL8UzsIqZV+A3SCbNsi9p
+        ExdvmvdMT/s+BiBbSqBZ4Lsm74/KpwuC2xVpUtJoF8MkFzfneM5xR2XdRDtb1QID
+        AQABo4GoMIGlMAkGA1UdEwQCMAAwHQYDVR0OBBYEFAjoRT9rqyoeBOqNyzZ7/7Zu
+        tWccMB8GA1UdIwQYMBaAFPLnh7nIrbKIzf9b4s+2yNTutfwmMAsGA1UdDwQEAwIF
+        oDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwLAYDVR0fBCUwIzAhoB+g
+        HYYbaHR0cDovL3BhdGgudG8uY3JsL2RlbW8uY3JsMA0GCSqGSIb3DQEBBQUAA4IB
+        AQBbcsQDxasByW8IO+QBKaN9yjuvjbig5PGzWDXeQz45Pws1ROY82rA7Vv52z6+M
+        JVGx7XMJ9G/OgGdMJ+D0CWjAhHPDFEqL1bagA3v3jyhxbxFj+pNecynze4aQe/d0
+        MgPH0p7ibg67TjOCNxX5YpuxrngTi5E8dGCDlPu/eE+ezFrQC8ENYC/ur/soeDwq
+        4orTTGeaeKk7jJiNSJOIsWH2mxiDaXuoZD1sHauDgNgOaXyM8WBtj0QzPQs0JGH/
+        8X2dROmn9h1BcmPQtGYLuf+17MBGoJBGmecfv4TJNEAwQBaYP52vMkOgrS15A72E
+        +BsZCbEfCa56hQQ6oOeHmYCB
+        -----END CERTIFICATE-----
+    - variable: gossip_key
+      label: "Communication gossip key"
+      type: "string"
+      required: true
+      default: "SFbIJdV9kO3n5ib6lczuEw=="
+consul:
+  scale: 3
+  start_on_create: true
+  health_check:
+    healthy_threshold: 2
+    recreate_on_quorum_strategy_config:
+      quorum: 1
+    port: 8500
+    unhealthy_threshold: 3
+    interval: 2000
+    strategy: recreateOnQuorum
+  metadata:
+    ca.crt: |
+            ${ca_crt}
+    consul1.crt: |
+            ${consul1_crt}
+    consul1.key: |
+            ${consul1_key}
+    consul2.crt: |
+            ${consul2_crt}
+    consul2.key: |
+            ${consul2_key}
+    consul3.crt: |
+            ${consul3_crt}
+    consul3.key: |
+            ${consul3_key}
+    enc.key: ${gossip_key}

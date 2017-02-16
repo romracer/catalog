@@ -1,0 +1,19 @@
+consul-conf:
+  image: romracer/consul-config
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.pull_image: always
+  volumes_from:
+    - consul
+  net: "container:consul"
+consul:
+  image: romracer/consul
+  labels:
+    io.rancher.sidekicks: consul-conf
+    io.rancher.container.pull_image: always
+  volumes:
+    - /opt/rancher/ssl
+    - /opt/rancher/config
+    - /var/consul
+  ports:
+    - 8500:8500/tcp
