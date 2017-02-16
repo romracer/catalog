@@ -3,7 +3,8 @@
   version: "0.1.0"
   description: |
     Docker volume plugin for OCFS2 filesystems
-  minimum_rancher_version: "v1.1.999"
+  minimum_rancher_version: v1.1.99
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: "CLUSTER_NAME"
       label: "OCFS2 cluster name"
