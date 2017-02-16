@@ -1,7 +1,6 @@
 version: '2'
 volumes:
   ${consul_data}:
-    external: true
     driver: ${volume_driver}
   consul_config:
     driver: local
