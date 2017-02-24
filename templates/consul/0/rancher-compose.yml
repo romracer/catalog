@@ -181,33 +181,6 @@
       type: "string"
       required: true
       default: "SFbIJdV9kO3n5ib6lczuEw=="
-    - variable: volume_driver
-      label: "Persistent volume driver"
-      description: "Choose a persistent volume driver if desired"
-      type: "enum"
-      required: true
-      default: "local"
-      options:
-        - "local"
-        - "rancher-ocfs2"
-    - variable: consul_data
-      label: "Consul data volume"
-      description: "Volume name for Consul data"
-      type: "string"
-      required: true
-      default: "consul_data"
-    - variable: consul_config
-      label: "Consul config volume"
-      description: "Volume name for Consul server config"
-      type: "string"
-      required: true
-      default: "consul_config"
-    - variable: consul_ssl
-      label: "Consul SSL volume"
-      description: "Volume name for Consul SSL config"
-      type: "string"
-      required: true
-      default: "consul_ssl"
 consul:
   scale: 3
   start_on_create: true
@@ -215,14 +188,10 @@ consul:
     healthy_threshold: 2
     recreate_on_quorum_strategy_config:
       quorum: 1
-    response_timeout: 2000
     port: 8500
     unhealthy_threshold: 3
-    initializing_timeout: 60000
     interval: 2000
     strategy: recreateOnQuorum
-    request_line: GET "/ui/#" "HTTP/1.0"
-    reinitializing_timeout: 60000
   metadata:
     ca.crt: |
             ${ca_crt}
