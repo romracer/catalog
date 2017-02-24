@@ -27,8 +27,6 @@ mariadb-data:
     io.rancher.container.start_once: true
 galera:
   image: registry.underpants-gnomes.biz:5000/galera-conf:v0.1.0
-  dns_search:
-    - rancher.internal
   labels:
     io.rancher.sidekicks: mariadb-data,mariadb-server
     io.rancher.container.hostname_override: container_name
