@@ -1,5 +1,7 @@
 consul-conf:
   image: romracer/consul-config:latest
+  dns_search:
+    - rancher.internal
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always

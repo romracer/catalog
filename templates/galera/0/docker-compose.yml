@@ -27,11 +27,15 @@ mariadb-data:
     io.rancher.container.start_once: true
 leader-forwarder:
   image: registry.underpants-gnomes.biz:5000/galera-leader-proxy:v0.1.0
+  dns_search:
+    - rancher.internal
   net: "container:galera"
   volumes_from:
     - 'mariadb-data'
 galera:
   image: registry.underpants-gnomes.biz:5000/galera-conf:v0.1.0
+  dns_search:
+    - rancher.internal
   labels:
     io.rancher.sidekicks: mariadb-data,mariadb-server,leader-forwarder
     io.rancher.container.hostname_override: container_name
