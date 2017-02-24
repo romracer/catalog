@@ -48,6 +48,7 @@ services:
       HOST_NAME16: '${HOST_NAME16}'
     volumes:
       - /lib/modules:/lib/modules:ro
+      - /run:/run
       - /var/run:/var/run
       - /dev:/host/dev
       - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
