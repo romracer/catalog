@@ -1,6 +1,6 @@
 .catalog:
   name: "Consul"
-  description: "Secure Consul cluster"
+  description: "Secure Consul cluster with Registrator"
   version: "0.6-rancher1"
   uuid: consul-0
   questions:
@@ -182,7 +182,6 @@
       required: true
       default: "SFbIJdV9kO3n5ib6lczuEw=="
 consul:
-  scale: 3
   start_on_create: true
   health_check:
     healthy_threshold: 2

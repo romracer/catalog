@@ -6,14 +6,33 @@ consul-conf:
   volumes_from:
     - consul
   net: "container:consul"
+consul-registrator:
+  image: gliderlabs/registrator:v7
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.pull_image: always
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+  net: "container:consul"
+  command:
+    - consul://consul:8500
 consul:
   image: romracer/consul:latest
   labels:
-    io.rancher.sidekicks: consul-conf
+    io.rancher.scheduler.global: 'true'
+    io.rancher.sidekicks: consul-conf,consul-registrator
     io.rancher.container.pull_image: always
   volumes:
     - /opt/rancher/ssl
     - /opt/rancher/config
     - /var/consul
-  expose:
+  ports:
+    - 8300:8300/tcp
+    - 8301:8301/tcp
+    - 8301:8301/udp
+    - 8302:8302/tcp
+    - 8302:8302/udp
+    - 8400:8400/tcp
     - 8500:8500/tcp
+    - 8600:8600/tcp
+    - 8600:8600/udp

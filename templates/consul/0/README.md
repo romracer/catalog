@@ -3,7 +3,7 @@
 
 ### Info:
 
- This template creates 3 Consul nodes that uses RPC encryption with TLS and gossip encryption to secure connection between consul cluster nodes, configuration is generated with confd from Rancher metadata. 
+ This template creates a global Consul stack that uses RPC encryption with TLS and gossip encryption to secure connection between consul cluster nodes, configuration is generated with confd from Rancher metadata. 
  TLS is used to verify the authenticity of the servers and the clients using the verify_incoming and verify_outgoing options.
 
  The variables used in this template include:
@@ -13,10 +13,11 @@
 - 16-bytes, Base64 encoded gossip encryption key.
  
 
-The templates uses two Docker images one as the main image and the other one is the sidekick:
+The templates uses three Docker images one as the main image and the others are sidekicks:
 
 - [consul](https://github.com/galal-hussein/consul-rancher).
 - [consul-config](https://github.com/galal-hussein/consul-config).
+- [consul-registrator](https://github.com/gliderlabs/registrator/tree/v7).
  
 ### Usage:
  
