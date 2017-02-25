@@ -7,7 +7,7 @@ consul-conf:
     - consul
   net: "container:consul"
 consul-registrator:
-  image: gliderlabs/registrator:v7
+  image: gliderlabs/registrator:latest
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
@@ -26,7 +26,7 @@ consul:
     - /opt/rancher/ssl
     - /opt/rancher/config
     - /var/consul
-  ports:
+  expose:
     - 8300:8300/tcp
     - 8301:8301/tcp
     - 8301:8301/udp
