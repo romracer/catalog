@@ -1,0 +1,52 @@
+mariadb-server:
+  image: registry.underpants-gnomes.biz:5000/galera:10.1.21-rancher1
+  net: "container:galera"
+  environment:
+    TERM: "xterm"
+    MYSQL_ROOT_PASSWORD: "${mysql_root_password}"
+    MYSQL_DATABASE: "${mysql_database}"
+    MYSQL_USER: "${mysql_user}"
+    MYSQL_PASSWORD: "${mysql_password}"
+  volumes_from:
+    - 'mariadb-data'
+  labels:
+    io.rancher.container.hostname_override: container_name
+  entrypoint: bash -x /opt/rancher/start_galera.sh
+mariadb-data:
+  image: registry.underpants-gnomes.biz:5000/galera:10.1.21-rancher1
+  net: none
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  volumes:
+    - galera-mariadb-data:/var/lib/mysql
+    - galera-mariadb-conf:/etc/mysql/conf.d
+    - galera-mariadb-preload:/docker-entrypoint-initdb.d
+    - galera-mariadb-rancher:/opt/rancher
+  command: /bin/true
+  labels:
+    io.rancher.container.start_once: true
+leader-forwarder:
+  image: registry.underpants-gnomes.biz:5000/galera-leader-proxy:v0.1.0
+  net: "container:galera"
+  volumes_from:
+    - 'mariadb-data'
+galera:
+  image: registry.underpants-gnomes.biz:5000/galera-conf:v0.1.0
+  labels:
+    io.rancher.sidekicks: mariadb-data,mariadb-server,leader-forwarder
+    io.rancher.container.hostname_override: container_name
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+  volumes_from:
+    - 'mariadb-data'
+  stdin_open: true
+  tty: true
+  command: /bin/bash
+
+galera-lb:
+  ports:
+    - 3306:3307/tcp
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+    - galera:galera
+  stdin_open: true
