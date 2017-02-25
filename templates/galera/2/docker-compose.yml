@@ -1,6 +1,6 @@
 mariadb-server:
   image: registry.underpants-gnomes.biz:5000/galera:10.1.21-rancher1
-  net: "container:galera"
+  net: "container:galera-conf"
   environment:
     TERM: "xterm"
     MYSQL_ROOT_PASSWORD: "${mysql_root_password}"
@@ -27,7 +27,7 @@ mariadb-data:
     io.rancher.container.start_once: true
 leader-forwarder:
   image: registry.underpants-gnomes.biz:5000/galera-leader-proxy:v0.1.0
-  net: "container:galera"
+  net: "container:galera-conf"
   volumes_from:
     - 'mariadb-data'
 galera-conf:
@@ -47,5 +47,5 @@ galera-lb:
   tty: true
   image: rancher/load-balancer-service
   links:
-    - galera:galera
+    - galera-conf:galera
   stdin_open: true
