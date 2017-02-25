@@ -30,7 +30,7 @@ leader-forwarder:
   net: "container:galera"
   volumes_from:
     - 'mariadb-data'
-galera:
+galera-conf:
   image: registry.underpants-gnomes.biz:5000/galera-conf:v0.1.0
   labels:
     io.rancher.sidekicks: mariadb-data,mariadb-server,leader-forwarder
@@ -41,7 +41,6 @@ galera:
   stdin_open: true
   tty: true
   command: /bin/bash
-
 galera-lb:
   ports:
     - 3306:3307/tcp
