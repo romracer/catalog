@@ -21,7 +21,7 @@
       type: password
       label: "MySQL DB Password"
       description: "Password for the MySQL user of the created database"
-galera-conf:
+galera:
   scale: 3
   metadata:
     mysqld: |
