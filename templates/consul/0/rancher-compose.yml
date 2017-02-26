@@ -1,7 +1,7 @@
 .catalog:
   name: "Consul"
   description: "Secure Consul cluster with Registrator"
-  version: "0.6-rancher1"
+  version: "0.7.5-rancher1"
   uuid: consul-0
   questions:
     - variable: ca_crt
@@ -181,6 +181,28 @@
       type: "string"
       required: true
       default: "SFbIJdV9kO3n5ib6lczuEw=="
+    - variable: master_token
+      label: "Master ACL Token"
+      type: "string"
+      required: true
+      default: "98a12e71-d0ac-4cef-8a6a-45129188cb1d"
+    - variable: acl_default_policy
+      label: "Default ACL Policy"
+      type: "enum"
+      required: true
+      default: "allow"
+      options:
+        - "allow"
+        - "deny"
+    - variable: acl_down_policy
+      label: "Default ACL policy when a token policy can not be read"
+      type: "enum"
+      required: true
+      default: "extend-cache"
+      options:
+        - "allow"
+        - "deny"
+        - "extend-cache"
 consul:
   start_on_create: true
   health_check:
@@ -207,3 +229,6 @@ consul:
     consul3.key: |
             ${consul3_key}
     enc.key: ${gossip_key}
+    master.token: ${master_token}
+    acl.default.policy: ${acl_default_policy}
+    acl.down.policy: ${acl_down_policy}

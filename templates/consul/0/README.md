@@ -11,20 +11,21 @@
 - Certificates and keys for Consul nodes.
 - CA certificate.
 - 16-bytes, Base64 encoded gossip encryption key.
+- ACL settings.
  
 
 The templates uses three Docker images one as the main image and the others are sidekicks:
 
-- [consul](https://github.com/galal-hussein/consul-rancher).
-- [consul-config](https://github.com/galal-hussein/consul-config).
+- [consul](https://github.com/romracer/consul-rancher).
+- [consul-config](https://github.com/romracer/consul-config).
 - [consul-registrator](https://github.com/gliderlabs/registrator).
  
 ### Usage:
  
  Select Consul from catalog.
 
- Enter the certificates and keys for consul nodes, ca certificates, and the encryption key.
+ Enter the certificates and keys for consul nodes, ca certificates, encryption key, and ACL token (use uuidgen if necessary).
 
  Click deploy.
  
- The consul nodes will be bound to the Rancher managed network IPs.
+ The consul nodes will be bound to the Rancher managed host IPs.
