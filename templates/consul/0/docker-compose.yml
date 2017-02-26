@@ -27,3 +27,5 @@ consul:
   volumes:
     - /consul/config
     - /consul/data
+  ports:
+    - 8500:8500/tcp
