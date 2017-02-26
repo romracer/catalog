@@ -9,6 +9,7 @@ consul-conf:
 consul-registrator:
   image: gliderlabs/registrator:latest
   labels:
+    io.rancher.container.dns: 'true'
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
   volumes:
@@ -21,11 +22,11 @@ consul:
   labels:
     io.rancher.scheduler.global: 'true'
     io.rancher.container.dns: 'true'
+    io.rancher.container.network: 'true'
+    io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: consul-conf,consul-registrator
     io.rancher.container.pull_image: always
   volumes:
     - /consul/config
     - /consul/data
   net: host
-  environment:
-    CONSUL_BIND_INTERFACE: eth0
