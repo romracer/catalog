@@ -27,3 +27,5 @@ consul:
     - /consul/config
     - /consul/data
   net: host
+  environment:
+    CONSUL_BIND_INTERFACE: eth0

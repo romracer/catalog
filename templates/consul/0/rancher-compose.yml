@@ -181,11 +181,6 @@
       type: "string"
       required: true
       default: "SFbIJdV9kO3n5ib6lczuEw=="
-    - variable: master_token
-      label: "Master ACL Token"
-      type: "string"
-      required: true
-      default: "98a12e71-d0ac-4cef-8a6a-45129188cb1d"
     - variable: acl_default_policy
       label: "Default ACL Policy"
       type: "enum"
@@ -203,6 +198,11 @@
         - "allow"
         - "deny"
         - "extend-cache"
+    - variable: master_token
+      label: "Master ACL Token"
+      type: "string"
+      required: true
+      default: "98a12e71-d0ac-4cef-8a6a-45129188cb1d"
 consul:
   start_on_create: true
   health_check:
