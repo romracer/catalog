@@ -11,9 +11,10 @@ consul-registrator:
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
+    io.rancher.container.dns: 'true'
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
-  net: "container:consul"
+  net: host
   command:
     - consul://consul:8500
 consul:
