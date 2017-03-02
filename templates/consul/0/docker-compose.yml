@@ -16,7 +16,7 @@ consul-registrator:
     - /var/run/docker.sock:/tmp/docker.sock
   net: host
   command:
-    - consul://consul.consul.rancher.internal:8500
+    - consul://consul:8500
 consul:
   image: romracer/consul:latest
   labels:
