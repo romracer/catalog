@@ -14,6 +14,8 @@ consul-registrator:
     io.rancher.container.dns: 'true'
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
+  environment:
+    CONSUL_HTTP_TOKEN: "${master_token}"
   net: host
   command:
     - consul://consul:8500
