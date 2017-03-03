@@ -7,7 +7,7 @@ consul-conf:
     - consul
   net: "container:consul"
 consul-registrator:
-  image: gliderlabs/registrator:latest
+  image: gliderlabs/registrator:master
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
