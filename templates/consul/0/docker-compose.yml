@@ -18,6 +18,10 @@ consul-registrator:
     CONSUL_HTTP_TOKEN: "${master_token}"
   net: host
   command:
+    - -retry-attempts
+    - 10
+    - -retry-interval
+    - 30000
     - consul://consul:8500
 consul:
   image: romracer/consul:latest
