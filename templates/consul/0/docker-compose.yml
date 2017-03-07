@@ -7,22 +7,18 @@ consul-conf:
     - consul
   net: "container:consul"
 consul-registrator:
-  image: gliderlabs/registrator:master
+  image: romracer/rancher-registrator:latest
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
     io.rancher.container.dns: 'true'
+    io.rancher.container.network: 'false'
   volumes:
-    - /var/run/docker.sock:/tmp/docker.sock
+    - /var/run/docker.sock:/var/run/docker.sock
   environment:
     CONSUL_HTTP_TOKEN: "${master_token}"
+    LOCAL_CONSUL_AGENT: "http://consul:8500"
   net: host
-  command:
-    - -retry-attempts
-    - "10"
-    - -retry-interval
-    - "30000"
-    - consul://consul:8500
 consul:
   image: romracer/consul:latest
   labels:
