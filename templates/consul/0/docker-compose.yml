@@ -17,7 +17,7 @@ consul-registrator:
     - /var/run/docker.sock:/var/run/docker.sock
   environment:
     CONSUL_HTTP_TOKEN: "${master_token}"
-    LOCAL_CONSUL_AGENT: "http://consul:8500"
+    STARTUP_DELAY_TIMER: "${startup_delay}"
   net: host
 consul:
   image: romracer/consul:latest
