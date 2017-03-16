@@ -40,7 +40,6 @@ galera:
     - 'mariadb-data'
   stdin_open: true
   tty: true
-  command: /bin/bash
 galera-lb:
   ports:
     - 3306:3307/tcp

@@ -23,12 +23,11 @@ registry:
 registry-datavolume:
   labels:
     io.rancher.container.start_once: 'true'
-  tty: true
+  command: /bin/true
   image: busybox
   volumes:
     - ${REGISTRY_DATA}:/var/lib/registry
   volume_driver: ${VOLUME_DRIVER}
-  stdin_open: true
 create-certs:
   environment:
     CA_SUBJECT: 'docker-ca'
