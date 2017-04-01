@@ -41,6 +41,7 @@
       default: "local"
       options:
         - "local"
+        - "rancher-nfs"
         - "rancher-ocfs2"
     - variable: "REGISTRY_DATA"
       label: "Registry data volume"
