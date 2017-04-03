@@ -1,5 +1,5 @@
 etcd:
-  image: romracer/rancher-etcd:v2.3.8-1
+  image: romracer/rancher-etcd:2.3.8-1
   labels:
     io.rancher.scheduler.affinity:host_label_soft: etcd=true
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
