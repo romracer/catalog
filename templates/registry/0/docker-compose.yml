@@ -25,6 +25,7 @@ registry-datavolume:
     io.rancher.container.start_once: 'true'
   command: /bin/true
   image: busybox:latest
+  net: none
   volumes:
     - ${REGISTRY_DATA}:/var/lib/registry
   volume_driver: ${VOLUME_DRIVER}
@@ -40,6 +41,7 @@ create-certs:
     io.rancher.container.start_once: 'true'
   tty: true
   image: paulczar/omgwtfssl:latest
+  net: none
   volumes:
     - ${CERTIFICATE_DATA}:/certs
   volume_driver: ${VOLUME_DRIVER}
@@ -55,6 +57,7 @@ registry-auth:
     - ${DOCKER_PASSWORD}
   tty: true
   image: registry:2
+  net: none
   volumes:
     - ${AUTHENTICATION_DATA}:/auth
     - ${REGISTRY_DATA}:/var/lib/registry
