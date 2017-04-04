@@ -17,8 +17,8 @@ consul-registrator:
     CONSUL_HTTP_TOKEN: "${master_token}"
   command:
     - -internal
-    - -resync 3600
-    - -useIpFromLabel io.rancher.container.ip
+    - -resync=3600
+    - -useIpFromLabel=io.rancher.container.ip
     - consul://consul:8500
 consul:
   image: romracer/consul:latest
