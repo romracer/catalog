@@ -203,11 +203,6 @@
       type: "string"
       required: true
       default: "12345678-abcd-1234-abcd-1234567890ab"
-    - variable: startup_delay
-      label: "Registrator startup Delay"
-      type: "int"
-      required: true
-      default: "30"
 consul:
   start_on_create: true
   health_check:
