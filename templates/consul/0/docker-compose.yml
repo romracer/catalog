@@ -15,11 +15,12 @@ consul-registrator:
     - /var/run/docker.sock:/tmp/docker.sock
   environment:
     CONSUL_HTTP_TOKEN: "${master_token}"
+  net: host
   command:
     - -internal
     - -resync=3600
     - -useIpFromLabel=io.rancher.container.ip
-    - consul://consul:8500
+    - consul://localhost:8500
 consul:
   image: romracer/consul:latest
   labels:
