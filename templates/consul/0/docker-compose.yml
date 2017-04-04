@@ -12,7 +12,7 @@ consul-registrator:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
   volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/run/docker.sock:/tmp/docker.sock
   environment:
     CONSUL_HTTP_TOKEN: "${master_token}"
   command:
