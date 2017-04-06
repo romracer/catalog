@@ -1,9 +1,9 @@
 name: Traefik
 description: |
-  (Experimental) Traefik active load balancer
-version: v1.2.1-rancher1
+  (Experimental) Traefik clustered/HA active load balancer
+version: v1.2.1-rancher2
 category: Load Balancing
 maintainer: "romracer <romracer@gmail.com>"
-minimum_rancher_version: v0.59.0
+minimum_rancher_version: v1.4.0
 license: 
-projectURL: https://github.com/romracer/alpine-traefik
+projectURL: https://github.com/romracer/romracer-traefik

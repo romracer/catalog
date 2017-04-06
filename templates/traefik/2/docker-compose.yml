@@ -1,0 +1,27 @@
+traefik:
+  ports:
+    - ${admin_port}:8000/tcp
+    - ${http_port}:${http_port}/tcp
+    - ${https_port}:${https_port}/tcp
+  log_driver: ''
+  log_opt: {}
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+  tty: true
+  image: romracer/romracer-traefik:1.2.1-1
+  environment:
+    - TRAEFIK_HTTP_PORT=${http_port}
+    - TRAEFIK_HTTPS_PORT=${https_port}
+    - TRAEFIK_HTTPS_ENABLE=${https_enable}
+    - TRAEFIK_ACME_ENABLE=${acme_enable}
+    - TRAEFIK_ACME_EMAIL=${acme_email}
+    - TRAEFIK_ACME_ONDEMAND=${acme_ondemand}
+    - TRAEFIK_ACME_ONHOSTRULE=${acme_onhostrule}
+    - KV_BACKEND=${kv_backend}
+    - KV_ADDRESS=${kv_address}
+    - RANCHER_DEFAULT_DOMAIN=${default_domain}
+    - RANCHER_EXPOSED_DEFAULT=${expose_default}
