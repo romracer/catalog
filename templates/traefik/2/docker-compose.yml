@@ -12,7 +12,7 @@ traefik:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
   tty: true
-  image: romracer/romracer-traefik:1.2.1-1
+  image: romracer/rancher-traefik:1.2.1-1
   environment:
     - TRAEFIK_HTTP_PORT=${http_port}
     - TRAEFIK_HTTPS_PORT=${https_port}
