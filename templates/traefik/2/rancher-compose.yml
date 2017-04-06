@@ -2,7 +2,7 @@
   name: traefik
   version: v1.2.1-rancher2
   description: |
-    (Experimental) Traefik clustered/HA active load balancer
+    Traefik clustered/HA active load balancer
   minimum_rancher_version: v1.4.0
   maintainer: "romracer <romracer@gmail.com>"
   uuid: traefik-0

@@ -1,9 +1,10 @@
 name: Traefik
 description: |
-  (Experimental) Traefik clustered/HA active load balancer
+  Traefik clustered/HA active load balancer
 version: v1.2.1-rancher2
 category: Load Balancing
 maintainer: "romracer <romracer@gmail.com>"
 minimum_rancher_version: v1.4.0
-license: 
 projectURL: https://github.com/romracer/romracer-traefik
+labels:
+  io.rancher.certified: Experimental
