@@ -25,3 +25,6 @@ traefik:
     - KV_ADDRESS=${kv_address}
     - RANCHER_DEFAULT_DOMAIN=${default_domain}
     - RANCHER_EXPOSED_DEFAULT=${expose_default}
+    - RANCHER_ENDPOINT=${rancher_endpoint}
+    - RANCHER_ACCESS_KEY=${access_key}
+    - RANCHER_SECRET_KEY=${secret_key}

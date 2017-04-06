@@ -34,7 +34,7 @@
     - variable: "https_enable"
       label: "Enable HTTPS:"
       description: |
-        Enable https working mode. If you activate, you need to fill SSL key and SSL crt in order to work.
+        Enable https working mode. If you activate, you should fill in SSL key and SSL crt.
       default: false
       required: true
       type: "enum"
@@ -66,18 +66,30 @@
       required: true
       default: true
       type: "boolean"
-    - variable: "ssl_key"
-      description: "SSL key to secure the service. *Required if you enable https"
-      label: "SSL key"
-      type: "multiline"
-      required: false
+    - variable: "expose_default"
+      description: "Expose Rancher services by default."
+      label: "Expose Rancher default:"
+      required: true
+      default: false
+      type: "boolean"
+    - variable: "rancher_endpoint"
+      description: "Rancher server address, including the protocol."
+      label: "Rancher server:"
+      required: true
+      default: "http://rancher.example.com"
+      type: "string"
+    - variable: "access_key"
+      description: "Rancher environment API access key, generated in the Rancher UI."
+      label: "Rancher access key:"
+      required: true
       default: ""
-    - variable: "ssl_crt"
-      description: "SSL cert to secure the service. *Required if you enable https"
-      label: "SSL crt"
-      type: "multiline"
-      required: false
+      type: "string"
+    - variable: "secret_key"
+      description: "Rancher environment API secret key, generated in the Rancher UI."
+      label: "Rancher secret key:"
+      required: true
       default: ""
+      type: "string"
     - variable: "kv_backend"
       description: "Key-value backend to store the configuration."
       label: "Key-Value Backend:"
@@ -99,12 +111,18 @@
       required: true
       default: ""
       type: "string"
-    - variable: "expose_default"
-      description: "Expose Rancher services by default."
-      label: "Expos Rancher default:"
-      required: true
-      default: false
-      type: "boolean"
+    - variable: "ssl_key"
+      description: "SSL key to secure the service. *Required if you enable https"
+      label: "SSL key"
+      type: "multiline"
+      required: false
+      default: ""
+    - variable: "ssl_crt"
+      description: "SSL cert to secure the service. *Required if you enable https"
+      label: "SSL crt"
+      type: "multiline"
+      required: false
+      default: ""
 traefik:
   retain_ip: true
   health_check:
