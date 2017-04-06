@@ -72,6 +72,12 @@
       required: true
       default: false
       type: "boolean"
+    - variable: "default_domain"
+      description: "Default domain to be appended to Rancher services."
+      label: "Default domain:"
+      required: true
+      default: ""
+      type: "string"
     - variable: "rancher_endpoint"
       description: "Rancher server address, including the protocol."
       label: "Rancher server:"
@@ -102,12 +108,6 @@
     - variable: "kv_address"
       description: "Address and port to reach the key-value store, ie. IP:PORT."
       label: "KV address (address:port):"
-      required: true
-      default: ""
-      type: "string"
-    - variable: "default_domain"
-      description: "Default domain to be appended to Rancher services."
-      label: "Default domain:"
       required: true
       default: ""
       type: "string"
