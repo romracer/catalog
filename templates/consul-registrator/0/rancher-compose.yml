@@ -1,0 +1,15 @@
+.catalog:
+  name: "Consul Registrator"
+  description: "Consul service registrator"
+  version: "master"
+  uuid: consul-registrator-0
+  questions:
+    - variable: master_token
+      label: "Consul ACL Token"
+      type: "string"
+      required: false
+      default: ""
+consul-registrator:
+  start_on_create: true
+  metadata:
+    master.token: ${master_token}

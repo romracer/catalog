@@ -18,7 +18,6 @@ The templates uses three Docker images one as the main image and the others are 
 
 - [consul](https://github.com/romracer/consul-rancher).
 - [consul-config](https://github.com/romracer/consul-config).
-- [consul-registrator](https://github.com/gliderlabs/registrator).
  
 ### Usage:
  

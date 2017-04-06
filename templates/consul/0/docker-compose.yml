@@ -6,28 +6,13 @@ consul-conf:
   volumes_from:
     - consul
   net: "container:consul"
-consul-registrator:
-  image: gliderlabs/registrator:master
-  labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.pull_image: always
-  volumes:
-    - /var/run/docker.sock:/tmp/docker.sock
-  environment:
-    CONSUL_HTTP_TOKEN: "${master_token}"
-  net: host
-  command:
-    - -internal
-    - -resync=3600
-    - -useIpFromLabel=io.rancher.container.ip
-    - consul://localhost:8500
 consul:
   image: romracer/consul:latest
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
     io.rancher.scheduler.global: 'true'
-    io.rancher.sidekicks: consul-conf,consul-registrator
+    io.rancher.sidekicks: consul-conf
   volumes:
     - /consul/config
     - /consul/data

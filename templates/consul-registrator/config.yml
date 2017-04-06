@@ -1,0 +1,5 @@
+name: Consul Registrator
+description: |
+  Consul service registrator
+version: master
+category: Clustering
