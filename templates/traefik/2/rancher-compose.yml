@@ -82,7 +82,7 @@
       description: "Rancher server address, including the protocol."
       label: "Rancher server:"
       required: true
-      default: "http://rancher.example.com"
+      default: "http://rancher.example.com/v1/projects/1a1"
       type: "string"
     - variable: "access_key"
       description: "Rancher environment API access key, generated in the Rancher UI."
