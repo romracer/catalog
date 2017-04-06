@@ -100,7 +100,7 @@
       description: "Key-value backend to store the configuration."
       label: "Key-Value Backend:"
       required: true
-      default: etcd
+      default: consul
       type: "enum"
       options:
         - consul
