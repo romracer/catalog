@@ -205,6 +205,7 @@
       default: "12345678-abcd-1234-abcd-1234567890ab"
 consul:
   start_on_create: true
+  retain_ip: true
   health_check:
     healthy_threshold: 2
     recreate_on_quorum_strategy_config:
