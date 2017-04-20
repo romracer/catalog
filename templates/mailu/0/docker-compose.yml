@@ -5,6 +5,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: http
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -57,6 +58,7 @@ services:
     image: mailu/dovecot:${VERSION}
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: imap
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -94,6 +96,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: smtp
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -126,6 +129,7 @@ services:
     image: mailu/rmilter:${VERSION}
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: milter
     restart: always
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
@@ -156,6 +160,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: antispam
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -183,6 +188,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: antivirus
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -210,6 +216,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: admin
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -242,6 +249,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: webmail
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -269,6 +277,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: fetchmail
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
@@ -296,6 +305,7 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: webdav
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
      BIND_ADDRESS: ${BIND_ADDRESS}
