@@ -203,8 +203,18 @@
       type: "string"
       required: true
       default: "12345678-abcd-1234-abcd-1234567890ab"
+    - variable: scale
+      label: "Number of Consul nodes to run"
+      type: "enum"
+      required: true
+      default: "3"
+      options:
+        - "1"
+        - "2"
+        - "3"
 consul:
   start_on_create: true
+  scale: ${scale}
   retain_ip: true
   health_check:
     healthy_threshold: 2

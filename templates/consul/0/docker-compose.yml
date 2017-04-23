@@ -11,7 +11,6 @@ consul:
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.pull_image: always
-    io.rancher.scheduler.global: 'true'
     io.rancher.sidekicks: consul-conf
   volumes:
     - /consul/config
