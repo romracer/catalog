@@ -1,6 +1,6 @@
 .catalog:
   name: traefik
-  version: v1.2.1-rancher2
+  version: v1.2.3-rancher2
   description: |
     Traefik clustered/HA active load balancer
   minimum_rancher_version: v1.4.0
