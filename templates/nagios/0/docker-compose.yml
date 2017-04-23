@@ -1,0 +1,13 @@
+version: '2'
+services:
+ http:
+    image: jasonrivers/nagios:${VERSION}
+    restart: always
+    labels: 
+     io.rancher.container.pull_image: always
+    volumes:
+      - "${ROOT}/etc:/opt/nagios/etc"
+      - "${ROOT}/var:/opt/nagios/var"
+      - "${ROOT}/plugins:/opt/Custom-Nagios-Plugins"
+    expose:
+      - "80"

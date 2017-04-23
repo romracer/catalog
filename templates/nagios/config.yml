@@ -1,0 +1,7 @@
+name: Nagios
+description: "Nagios Core running on Ubuntu LTS with NagiosGraph & NRPE"
+version: v0.0.1
+category: Monitoring
+maintainer: romracer
+license: MIT License
+projectURl: "https://github.com/JasonRivers/Docker-Nagios"

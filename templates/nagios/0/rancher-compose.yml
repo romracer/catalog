@@ -1,0 +1,18 @@
+version: '2'
+.catalog:
+ name: "Nagios"
+ minimun_rancher_version: 1.2.0
+ version: "v0.0.1"
+ questions:
+  - variable: ROOT
+    label: "Root Path"
+    description: "Set this to the path where Nagios data and configuration is stored"
+    default: "/nagios"
+    required: true
+    type: string
+  - variable: VERSION
+    label: "Nagios Version"
+    description: "Nagios version to run (4.2.4, 4.3.1, etc. or latest)"
+    default: "latest"
+    required: true
+    type: string
