@@ -29,7 +29,6 @@ registry-datavolume:
   net: none
   volumes:
     - ${REGISTRY_DATA}:/var/lib/registry
-  volume_driver: ${VOLUME_DRIVER}
 create-certs:
   environment:
     CA_SUBJECT: 'docker-ca'
@@ -46,7 +45,6 @@ create-certs:
   net: none
   volumes:
     - ${CERTIFICATE_DATA}:/certs
-  volume_driver: ${VOLUME_DRIVER}
   stdin_open: true
 registry-auth:
   labels:
@@ -65,5 +63,4 @@ registry-auth:
     - registry-datavolume
   volumes:
     - ${AUTHENTICATION_DATA}:/auth
-  volume_driver: ${VOLUME_DRIVER}
   stdin_open: true

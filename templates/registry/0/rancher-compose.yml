@@ -33,31 +33,21 @@
       label: "Subject Alternative IPs"
       description: "Comma separated IP addresses that might be used to access the registry"
       type: "string"
-    - variable: "VOLUME_DRIVER"
-      label: "Persistent volume driver"
-      description: "Choose a persistent volume driver if desired"
-      type: "enum"
-      required: true
-      default: "local"
-      options:
-        - "local"
-        - "rancher-nfs"
-        - "rancher-ocfs2"
     - variable: "REGISTRY_DATA"
-      label: "Registry data volume"
-      description: "Volume name for registry data"
+      label: "Registry data location"
+      description: "Named volume or path for registry data"
       type: "string"
       required: true
       default: "registry_data"
     - variable: "CERTIFICATE_DATA"
-      label: "Certificate data volume"
-      description: "Volume name for registry certificates"
+      label: "Certificate data location"
+      description: "Named volume or path for registry certificates"
       type: "string"
       required: true
       default: "registry_certificates"
     - variable: "AUTHENTICATION_DATA"
-      label: "Registry auth data volume"
-      description: "Volume name for registry authentication information"
+      label: "Registry auth data location"
+      description: "Named volume or path for registry authentication information"
       type: "string"
       required: true
       default: "registry_authentication"
@@ -71,5 +61,14 @@ create-certs:
   scale: 1
 registry:
   scale: 1
+  health_check:
+    healthy_threshold: 2
+    response_timeout: 2000
+    port: 5000
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    strategy: recreate
+    reinitializing_timeout: 60000
 registry-auth:
   scale: 1

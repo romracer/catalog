@@ -1,0 +1,10 @@
+deck-chores:
+  image: funkyfuture/deck-chores:latest-$ARCHITECTURE
+  environment:
+    SERVICE_ID_LABELS: io.rancher.stack_service.name
+  net: none
+  volumes:
+  - "${DOCKER_SOCKET}:/var/run/docker.sock"
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'

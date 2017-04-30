@@ -1,0 +1,5 @@
+name: Deck Chores
+description: |
+  Job scheduler for Docker containers, configured via container labels.
+version: '0.1'
+category: "Docker"

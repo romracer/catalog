@@ -1,0 +1,21 @@
+.catalog:
+  name: "Deck Chores"
+  version: "0.1"
+  description: |
+    Job scheduler for Docker containers, configured via container labels.
+  questions:
+    - variable: "DOCKER_SOCKET"
+      label: "Docker socket path"
+      description: "Path to the Docker socket on your hosts"
+      type: "string"
+      required: true
+      default: "/var/run/docker.sock"
+    - variable: "ARCHITECTURE"
+      label: "Architecture"
+      description: "Docker host architecture"
+      type: "enum"
+      required: true
+      default: "amd64"
+      options:
+        - "amd64"
+        - "arm"

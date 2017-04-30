@@ -3,5 +3,3 @@ description: |
     Synchronous multi-master cluster for MariaDB
 version: 10.1.22-rancher3
 category: Databases
-labels:
-  io.rancher.certified: Experimental

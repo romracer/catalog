@@ -3,8 +3,12 @@ services:
  nagios:
     image: jasonrivers/nagios:${VERSION}
     restart: always
+    environment:
+      NAGIOS_FQDN: ${FQDN}
+      NAGIOS_TIMEZONE: ${TIMEZONE}
     labels: 
      io.rancher.container.pull_image: always
+     io.rancher.container.hostname_override: container_name
     volumes:
       - "${ROOT}/etc:/opt/nagios/etc"
       - "${ROOT}/var:/opt/nagios/var"

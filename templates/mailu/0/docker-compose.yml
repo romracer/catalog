@@ -58,6 +58,7 @@ services:
     image: mailu/dovecot:${VERSION}
     labels: 
      io.rancher.container.pull_image: always
+     io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/smtp
      com.docker.compose.service: imap
     environment:
      FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
@@ -126,7 +127,7 @@ services:
       - "${ROOT}/certs:/certs"
       - "${ROOT}/overrides:/overrides"
  milter:
-    image: mailu/rmilter:${VERSION}
+    image: romracer/rmilter:${VERSION}
     labels: 
      io.rancher.container.pull_image: always
      com.docker.compose.service: milter
@@ -184,7 +185,7 @@ services:
     volumes:
       - "${ROOT}/filter:/var/lib/rspamd"
  antivirus:
-    image: mailu/clamav:${VERSION}
+    image: romracer/clamav:${VERSION}
     restart: always
     labels: 
      io.rancher.container.pull_image: always
@@ -327,4 +328,4 @@ services:
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
     volumes:
-      - "$ROOT/dav:/data"
+      - "${ROOT}/dav:/data"

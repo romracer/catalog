@@ -6,5 +6,3 @@ category: Load Balancing
 maintainer: "romracer <romracer@gmail.com>"
 minimum_rancher_version: v1.4.0
 projectURL: https://github.com/romracer/romracer-traefik
-labels:
-  io.rancher.certified: Experimental

@@ -16,3 +16,27 @@ version: '2'
     default: "latest"
     required: true
     type: string
+  - variable: FQDN
+    label: "Nagios FQDN"
+    description: "FQDN for this Nagios instance"
+    default: "nagios.example.com"
+    required: true
+    type: string
+  - variable: TIMEZONE
+    label: "Nagios Timezone"
+    description: "Timezone for Nagios.  use_timezone in nagios.cfg should match"
+    default: "UTC"
+    required: true
+    type: string
+nagios:
+  scale: 1
+  start_on_create: true
+  health_check:
+    healthy_threshold: 2
+    response_timeout: 2000
+    port: 80
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    strategy: recreate
+    reinitializing_timeout: 60000
