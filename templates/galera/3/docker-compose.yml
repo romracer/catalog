@@ -11,6 +11,7 @@ mariadb-server:
     - 'mariadb-data'
   labels:
     io.rancher.container.hostname_override: container_name
+    io.rancher.container.pull_image: always
   entrypoint: bash -x /opt/rancher/start_galera.sh
 mariadb-data:
   image: registry.underpants-gnomes.biz:5000/galera:10.2.6-rancher1
@@ -25,6 +26,7 @@ mariadb-data:
   command: /bin/true
   labels:
     io.rancher.container.start_once: true
+    io.rancher.container.pull_image: always
 leader-forwarder:
   image: registry.underpants-gnomes.biz:5000/galera-leader-proxy:v0.1.0
   net: "container:galera"
