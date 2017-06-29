@@ -1,5 +1,5 @@
 name: PowerDNS Authoritative Server
 description: |
   A gmysql backend (MySQL/MariaDB) PowerDNS authoritative server
-version: 4.0.2-rancher1
+version: 4.0.4-rancher1
 category: External DNS

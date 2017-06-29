@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: "PowerDNS Authoritative Server"
-  version: "4.0.2-rancher1"
+  version: "4.0.4-rancher1"
   description: |
     A gmysql backend (MySQL/MariaDB) PowerDNS authoritative server.
   minimum_rancher_version: "v1.0.0"
