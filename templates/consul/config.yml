@@ -1,7 +1,7 @@
 name: Consul Cluster
 description: |
   Consul cluster
-version: 0.8.4-rancher1
+version: 0.8.5-rancher1
 category: Clustering
 labels:
   io.rancher.certified: Experimental
