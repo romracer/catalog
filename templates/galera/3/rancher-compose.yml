@@ -1,8 +1,8 @@
 .catalog:
   name: "MariaDB Galera Cluster"
-  version: 10.2.6-rancher3
+  version: 10.2.7-rancher3
   description: |
-    Galera Cluster based on MariaDB 10.2.6
+    Galera Cluster based on MariaDB 10.2.7
   questions:
     - variable: "mysql_root_password"
       type: password
@@ -43,6 +43,7 @@ galera:
       group_concat_max_len=8192
       wait_timeout=14400
       progress_report_time=1
+      max_allowed_packet=32M
   health_check:
     healthy_threshold: 2
     response_timeout: 2000
