@@ -30,8 +30,10 @@ services:
       - "${ROOT}/certs:/certs"
  redis:
     image: redis:3
+    restart: always
     labels: 
      io.rancher.container.pull_image: always
+     com.docker.compose.service: redis
     environment:
      BIND_ADDRESS: ${BIND_ADDRESS}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
@@ -51,11 +53,11 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
-    restart: always
     volumes:
       - "${ROOT}/redis:/data"
  imap:
     image: mailu/dovecot:${VERSION}
+    restart: always
     labels: 
      io.rancher.container.pull_image: always
      io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/smtp
@@ -80,7 +82,6 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
-    restart: always
     ports:
       - "${BIND_ADDRESS}:110:110"
       - "${BIND_ADDRESS}:143:143"
@@ -123,11 +124,12 @@ services:
       - "${BIND_ADDRESS}:465:465"
       - "${BIND_ADDRESS}:587:587"
     volumes:
+      - "${ROOT}/queue:/queue"
       - "${ROOT}/data:/data"
       - "${ROOT}/certs:/certs"
       - "${ROOT}/overrides:/overrides"
  milter:
-    image: romracer/rmilter:${VERSION}
+    image: mailu/rmilter:${VERSION}
     labels: 
      io.rancher.container.pull_image: always
      com.docker.compose.service: milter
