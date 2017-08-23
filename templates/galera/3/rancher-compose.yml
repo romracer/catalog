@@ -1,8 +1,8 @@
 .catalog:
   name: "MariaDB Galera Cluster"
-  version: 10.2.7-rancher3
+  version: 10.2.8-rancher3
   description: |
-    Galera Cluster based on MariaDB 10.2.7
+    Galera Cluster based on MariaDB 10.2.8
   questions:
     - variable: "mysql_root_password"
       type: password
@@ -38,7 +38,7 @@ galera:
       default_storage_engine=InnoDB
       wsrep_on=ON
       wsrep_provider=/usr/lib/galera/libgalera_smm.so
-      wsrep_sst_method=xtrabackup-v2
+      wsrep_sst_method=mariabackup
       wsrep_sst_auth=root:${mysql_root_password}
       group_concat_max_len=8192
       wait_timeout=14400
