@@ -1,6 +1,6 @@
 .catalog:
   name: traefik
-  version: v1.2.3-rancher2
+  version: v1.4.2-rancher2
   description: |
     Traefik clustered/HA active load balancer
   minimum_rancher_version: v1.4.0
@@ -72,27 +72,15 @@
       required: true
       default: false
       type: "boolean"
+    - variable: "filter_unhealthy"
+      description: "Filter services with unhealthy states and inactive states."
+      label: "Filter unhealthy services:"
+      required: true
+      default: false
+      type: "boolean"
     - variable: "default_domain"
       description: "Default domain to be appended to Rancher services."
       label: "Default domain:"
-      required: true
-      default: ""
-      type: "string"
-    - variable: "rancher_endpoint"
-      description: "Rancher server address, including the protocol."
-      label: "Rancher server:"
-      required: true
-      default: "http://rancher.example.com/v1/projects/1a1"
-      type: "string"
-    - variable: "access_key"
-      description: "Rancher environment API access key, generated in the Rancher UI."
-      label: "Rancher access key:"
-      required: true
-      default: ""
-      type: "string"
-    - variable: "secret_key"
-      description: "Rancher environment API secret key, generated in the Rancher UI."
-      label: "Rancher secret key:"
       required: true
       default: ""
       type: "string"
