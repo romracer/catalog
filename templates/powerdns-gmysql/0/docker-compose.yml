@@ -1,7 +1,7 @@
 version: '2'
 services:
   pdns-server:
-    image: registry.underpants-gnomes.biz:5000/pdns:4.0.4-1
+    image: registry.underpants-gnomes.biz:5000/pdns:4.0.5-1
     environment:
       PDNSCONF_ANY_TO_TCP: 'yes'
       PDNSCONF_GMYSQL_HOST: '${PDNSCONF_GMYSQL_HOST}'
