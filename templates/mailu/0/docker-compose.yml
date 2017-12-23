@@ -1,22 +1,18 @@
 version: '2'
 services:
- http:
-    image: mailu/$FRONTEND:${VERSION}
+ front:
+    image: mailu/nginx:${VERSION}
     restart: always
     labels: 
      io.rancher.container.pull_image: always
-     com.docker.compose.service: http
+     com.docker.compose.service: front
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -26,24 +22,42 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
+    expose:
+      - "80"
+      - "443"
+    ports:
+      - "${BIND_ADDRESS4}:110:110"
+      - "${BIND_ADDRESS4}:143:143"
+      - "${BIND_ADDRESS4}:993:993"
+      - "${BIND_ADDRESS4}:995:995"
+      - "${BIND_ADDRESS4}:25:25"
+      - "${BIND_ADDRESS4}:465:465"
+      - "${BIND_ADDRESS4}:587:587"
     volumes:
       - "${ROOT}/certs:/certs"
  redis:
-    image: redis:3
+    image: redis:alpine
     restart: always
     labels: 
      io.rancher.container.pull_image: always
      com.docker.compose.service: redis
     environment:
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -53,6 +67,16 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
     volumes:
       - "${ROOT}/redis:/data"
  imap:
@@ -60,19 +84,14 @@ services:
     restart: always
     labels: 
      io.rancher.container.pull_image: always
-     io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/smtp
      com.docker.compose.service: imap
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -82,16 +101,21 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
-    ports:
-      - "${BIND_ADDRESS}:110:110"
-      - "${BIND_ADDRESS}:143:143"
-      - "${BIND_ADDRESS}:993:993"
-      - "${BIND_ADDRESS}:995:995"
-      - "${BIND_ADDRESS}:4190:4190"
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
+    depends_on:
+      - front
     volumes:
       - "${ROOT}/data:/data"
       - "${ROOT}/mail:/mail"
-      - "${ROOT}/certs:/certs"
       - "${ROOT}/overrides:/overrides"
  smtp:
     image: mailu/postfix:${VERSION}
@@ -99,17 +123,14 @@ services:
     labels: 
      io.rancher.container.pull_image: always
      com.docker.compose.service: smtp
+     io.rancher.scheduler.affinity:container_label: io.rancher.stack_service.name=$${stack_name}/front
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -119,44 +140,20 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
-    ports:
-      - "${BIND_ADDRESS}:25:25"
-      - "${BIND_ADDRESS}:465:465"
-      - "${BIND_ADDRESS}:587:587"
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
+    depends_on:
+      - front
     volumes:
-      - "${ROOT}/queue:/queue"
       - "${ROOT}/data:/data"
-      - "${ROOT}/certs:/certs"
-      - "${ROOT}/overrides:/overrides"
- milter:
-    image: mailu/rmilter:${VERSION}
-    labels: 
-     io.rancher.container.pull_image: always
-     com.docker.compose.service: milter
-    restart: always
-    environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
-     COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
-     DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
-     FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
-     MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
-     POSTMASTER: ${POSTMASTER}
-     RELAYHOST: ${RELAYHOST}
-     RELAYNETS: ${RELAYNETS}
-     ROOT: ${ROOT}
-     SECRET_KEY: ${SECRET_KEY}
-     VERSION: ${VERSION}
-     WEBMAIL: ${WEBMAIL}
-     WEBDAV: ${WEBDAV}
-    volumes:
-      - "${ROOT}/filter:/data"
-      - "${ROOT}/dkim:/dkim"
       - "${ROOT}/overrides:/overrides"
  antispam:
     image: mailu/rspamd:${VERSION}
@@ -165,16 +162,12 @@ services:
      io.rancher.container.pull_image: always
      com.docker.compose.service: antispam
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -184,25 +177,35 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
+    depends_on:
+      - front
     volumes:
       - "${ROOT}/filter:/var/lib/rspamd"
+      - "$ROOT/dkim:/dkim"
+      - "$ROOT/overrides/rspamd:/etc/rspamd/override.d"
  antivirus:
-    image: romracer/clamav:${VERSION}
+    image: mailu/clamav:${VERSION}
     restart: always
     labels: 
      io.rancher.container.pull_image: always
      com.docker.compose.service: antivirus
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -212,8 +215,52 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
     volumes:
       - "${ROOT}/filter:/data"
+ webdav:
+    image: "mailu/${WEBDAV}:${VERSION}"
+    restart: always
+    labels: 
+     io.rancher.container.pull_image: always
+     com.docker.compose.service: webdav
+    environment:
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
+     COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+     DOMAIN: ${DOMAIN}
+     ADMIN: ${EXPOSE_ADMIN}
+     FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
+     HOSTNAMES: ${HOSTNAMES}
+     MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
+     POSTMASTER: ${POSTMASTER}
+     RELAYHOST: ${RELAYHOST}
+     RELAYNETS: ${RELAYNETS}
+     ROOT: ${ROOT}
+     SECRET_KEY: ${SECRET_KEY}
+     VERSION: ${VERSION}
+     WEBMAIL: ${WEBMAIL}
+     WEBDAV: ${WEBDAV}
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
+    volumes:
+      - "${ROOT}/dav:/data"
  admin:
     image: mailu/admin:${VERSION}
     restart: always
@@ -221,16 +268,12 @@ services:
      io.rancher.container.pull_image: always
      com.docker.compose.service: admin
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -240,12 +283,21 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
-    expose:
-      - "80"
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
+    depends_on:
+      - redis
     volumes:
       - "${ROOT}/data:/data"
       - "${ROOT}/dkim:/dkim"
-      - "${ROOT}/certs:/certs"
       - /var/run/docker.sock:/var/run/docker.sock:ro
  webmail:
     image: "mailu/${WEBMAIL}:${VERSION}"
@@ -254,16 +306,12 @@ services:
      io.rancher.container.pull_image: always
      com.docker.compose.service: webmail
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -273,6 +321,16 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
     volumes:
       - "${ROOT}/webmail:/data"
  fetchmail:
@@ -282,16 +340,12 @@ services:
      io.rancher.container.pull_image: always
      com.docker.compose.service: fetchmail
     environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
+     BIND_ADDRESS4: ${BIND_ADDRESS4}
      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
      DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
+     ADMIN: ${EXPOSE_ADMIN}
      FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
+     HOSTNAMES: ${HOSTNAMES}
      MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
      POSTMASTER: ${POSTMASTER}
      RELAYHOST: ${RELAYHOST}
@@ -301,33 +355,15 @@ services:
      VERSION: ${VERSION}
      WEBMAIL: ${WEBMAIL}
      WEBDAV: ${WEBDAV}
+     TLS_FLAVOR: ${TLS_FLAVOR}
+     PASSWORD_SCHEME: ${PASSWORD_SCHEME}
+     RECIPIENT_DELIMITER: ${RECIPIENT_DELIMITER}
+     AUTH_RATELIMIT: ${AUTH_RATELIMIT}
+     DISABLE_STATISTICS: "true"
+     DMARC_RUA: postmaster
+     DMARC_RUF: postmaster
+     WELCOME: "false"
+     WEB_ADMIN: "/admin"
+     WEB_WEBMAIL: "/webmail"
     volumes:
       - "${ROOT}/data:/data"
- webdav:
-    image: mailu/$WEBDAV:$VERSION
-    restart: always
-    labels: 
-     io.rancher.container.pull_image: always
-     com.docker.compose.service: webdav
-    environment:
-     FETCHMAIL_KEEP: ${FETCHMAIL_KEEP}
-     BIND_ADDRESS: ${BIND_ADDRESS}
-     COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
-     DEBUG: ${DEBUG}
-     DOMAIN: ${DOMAIN}
-     ENABLE_CERTBOT: ${ENABLE_CERTBOT}
-     EXPOSE_ADMIN: ${EXPOSE_ADMIN}
-     FETCHMAIL_DELAY: ${FETCHMAIL_DELAY}
-     FRONTEND: ${FRONTEND}
-     HOSTNAME: ${HOSTNAME}
-     MESSAGE_SIZE_LIMIT: ${MESSAGE_SIZE_LIMIT}
-     POSTMASTER: ${POSTMASTER}
-     RELAYHOST: ${RELAYHOST}
-     RELAYNETS: ${RELAYNETS}
-     ROOT: ${ROOT}
-     SECRET_KEY: ${SECRET_KEY}
-     VERSION: ${VERSION}
-     WEBMAIL: ${WEBMAIL}
-     WEBDAV: ${WEBDAV}
-    volumes:
-      - "${ROOT}/dav:/data"
