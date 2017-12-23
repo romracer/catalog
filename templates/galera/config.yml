@@ -1,5 +1,5 @@
 name: MariaDB Galera Cluster
 description: |
     Synchronous multi-master cluster for MariaDB
-version: 10.2.8-rancher3
+version: 10.2.11-rancher3
 category: Databases

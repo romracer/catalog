@@ -1,8 +1,8 @@
 .catalog:
   name: "MariaDB Galera Cluster"
-  version: 10.2.8-rancher3
+  version: 10.2.11-rancher3
   description: |
-    Galera Cluster based on MariaDB 10.2.8
+    Galera Cluster based on MariaDB 10.2
   questions:
     - variable: "mysql_root_password"
       type: password
